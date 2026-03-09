@@ -48,6 +48,7 @@ Then:
 @skills/code-quality.md
 @skills/ci-cd.md
 @skills/wat-framework.md
+@skills/web-design.md
 @skills/security.md
 @skills/testing.md
 
@@ -95,6 +96,7 @@ When you learn something new during any project session that could be reusable, 
 | GitHub Actions, CI pipelines, SBOM | `skills/ci-cd.md` |
 | Credentials, secrets, encryption | `skills/security.md` |
 | WAT architecture, workflows, tools-first | `skills/wat-framework.md` |
+| Frontend design, anti-generic guardrails, screenshot QA | `skills/web-design.md` |
 | Test conventions, coverage, test plans | `skills/testing.md` |
 | Python-specific style / tools | `languages/python.md` |
 | Dart/Flutter-specific style / tools | `languages/dart-flutter.md` |
