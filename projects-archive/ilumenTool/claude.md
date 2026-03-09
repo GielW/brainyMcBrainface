@@ -71,7 +71,8 @@ ilumenTool/                         ← Repo root
     │   │   └── serial_number.dart   ← Serial number validation widget
     │   ├── variable_classes/
     │   │   ├── product.dart        ← Product data class
-    │   │   └── build_order.dart    ← BuildOrder + BuildOrderItem data classes
+    │   │   ├── build_order.dart    ← BuildOrder + BuildOrderItem data classes
+    │   │   └── product_registry.dart ← Central product registry (enums, configs, mappings)
     │   └── other/                  ← Utilities (LED animation, platform info)
     ├── assets/
     │   ├── avrdude/                ← AVR programmer configs
@@ -153,15 +154,20 @@ libstdc++-12-dev libsecret-1-dev libjsoncpp-dev libudev-dev libserialport-dev
 | `ILH-SGR` | Iluheat SGR | — | ESP32 | `ILUHEAT_SGR` |
 | `ILS` | Ilusmart | ATmega | ESP32 | `ILUSMART` |
 
+**Product Registry** (`lib/variable_classes/product_registry.dart`): Central single source of truth for all product configuration. Contains:
+
+- `ProductFamily` enum — 9 families (ILB, ILB2, ILC, ILC2, ILH, ILH-SGR, ILS, PBM, SPS) with `.code` and `.fromCode()` factory
+- `ProgramTarget` enum — 8 programming targets with per-target config (MCU, ESP, USB, serial, Firebase flags)
+- `ProductDefinition` — display name, image file, page title, isSmart flag, sub-types, legacy XML codes
+- `ProductRegistry` static class — maps for TB device types, TB shared/server attributes, AVR signatures/fuses/parts, ESP asset paths, firmware paths, build order types, and convenience methods
+
 When adding a new product, update **all** of these locations:
 
-1. `programmingView.dart` — `_config` array entry
-2. `ProductButtonWidget.dart` — button label + navigation case
+1. `product_registry.dart` — add `ProductFamily` enum value, `ProductDefinition` entry, program target(s), TB mappings, AVR/ESP configs as needed
+2. `product_button_widget.dart` — navigation case (display name auto-resolved via registry)
 3. `programmingTab.dart` — product button grid
-4. `thingsboardConnector.dart` — device type mapping + server/shared attributes
-5. `ProductManager.dart` — serial number/category mapping
-6. `espressif.dart` — SPIFFS config JSON + firmware path mappings
-7. `ProductionView.dart` — dropdown menu item
+4. `espressif.dart` — SPIFFS config JSON (`burnEspConfig()` — not yet registry-backed)
+5. `ProductionView.dart` — dropdown menu item (sub-types auto-resolved via registry)
 
 ### External Services
 
@@ -373,7 +379,7 @@ This is documented in `firestore.rules` (reference file, deployed manually via F
 
 - **Monolithic files**: `programmingView.dart` (2,385 lines), ~~`deviceCloning.dart` (1,712 lines)~~ (⚠️ deprecated — feature planned for removal), `ilusmart1Setup.dart` (1,550 lines) — planned for decomposition.
 - **~~Duplicate files~~**: ✅ Fixed — `PlatformInfo.dart` and `ProductButtonWidget.dart` duplicates moved to `old_files/`; canonical copies remain in `lib/Other/`.
-- **Product if-chains**: Product type mapping is done via chained `if` statements in 8+ files — should be refactored into a product registry/enum.
+- **~~Product if-chains~~**: ✅ Fixed (March 2026) — created `product_registry.dart` with `ProductFamily` enum, `ProgramTarget` enum, and `ProductRegistry` class. Refactored 10 files: product_button_widget (display names), build_order_form_view (product/sub-types), product_manager (TB device type), thingsboard_connector (shared/server attrs), production_view (sub-types, isSmart, XML codes), programming_view (_config array, fuses, MCU parts, page titles), avr_dude (signatures), espressif (bootloader/firmware/partition/boot_app paths), testing_view/ilc_testing_view/ils_testing (page titles). Remaining complex if-chains: espressif `burnEspConfig()` SPIFFS JSON, firmware_connector `checkFWs()`, product_button_widget navigation routing.
 - **~~`.tostring()` bug~~**: ✅ Fixed — lowercase `tostring()` replaced with `toString()` in `ilusmart1Setup.dart` and `ILS_Testing.dart`.
 - **~~Lint cleanup (46 issues)~~**: ✅ Fixed — reduced from 46 to 4 info-level issues. Categories fixed: `empty_statements` (10), `use_key_in_widget_constructors` (12), `dangling_library_doc_comments` (6), `prefer_is_not_empty` (4), `avoid_single_cascade_in_expression_statements` (10). Remaining: 2× `unnecessary_overrides`, 1× `collection_methods_unrelated_type`, 1× `unrelated_type_equality_checks`.
 - **espressif.dart forEach refactor** — ⚠️ Cascade `.forEach()` was refactored to regular `.forEach()` in 10 locations. **Code review (March 9):** All 6 functions verified correct; bug fixed — `ersaseEspFlash()` stderr was commented out, now restored; all 5 `Process.run()` functions now check both stdout and stderr for success strings (esptool v5+ compatibility). Validated: T18 (ILC), T21 (ILS), T22 (ILH-SGR) PASS. Still need hardware tests: ILB2 (T19), ILH (T20), and Windows (T23). See `test/test_plan.md` and TODO #44.
@@ -418,7 +424,7 @@ This is documented in `firestore.rules` (reference file, deployed manually via F
 | ----- | ------ | ----- |
 | Phase 0 | ✅ Done | Security — secrets externalized, logging redacted |
 | Phase 1 | 🟡 In Progress | Core cleanup: auto-updater (done), ILH-SGR (done), lint cleanup 46→4 info (done), Firebase abstraction (done), GSheets→Firestore (done), ESP bugs (done), error handling (#18, #19, #31, #32, #37), Linux ports (#24–28), regression testing (#44) |
-| Phase 2 | Not started | Architecture refactoring: product registry/enum (#41), settings from `_prodCat` (#2, #8), ~~file naming standardisation (#42)~~ ✅ Done, credential rotation, state management (Riverpod/Bloc), wire `ilumentool_db` |
+| Phase 2 | 🟡 In Progress | Architecture refactoring: ~~product registry/enum (#41)~~ ✅ Done, settings from `_prodCat` (#2, #8), ~~file naming standardisation (#42)~~ ✅ Done, credential rotation, state management (Riverpod/Bloc), wire `ilumentool_db` |
 | Phase 3 | Not started | View decomposition: break monoliths (#40), refactor ProductionView (#9) |
 | Phase 4 | Not started | Testing, logging (#13), CI/CD, documentation |
 | Extras (PX) | 🟡 Ongoing | Build orders (core done, polish #74–79), InvenTree integration (#80–90), label printing (#46–54) — independent of core phases, can be worked on at any time |
