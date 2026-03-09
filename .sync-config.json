@@ -1,0 +1,21 @@
+{
+  "description": "Mapping of project names to their claude.md source locations",
+  "github_base": "/mnt/64AA9536AA950628/GitHub",
+  "projects": [
+    {
+      "name": "40Jarigen",
+      "source": "/mnt/64AA9536AA950628/GitHub/40Jarigen/claude.md",
+      "repo_path": "projects/40Jarigen/claude.md"
+    },
+    {
+      "name": "DPO-Dashboard",
+      "source": "/mnt/64AA9536AA950628/GitHub/DPO-Dashboard/CLAUDE.md",
+      "repo_path": "projects/DPO-Dashboard/CLAUDE.md"
+    },
+    {
+      "name": "ilumenTool",
+      "source": "/mnt/64AA9536AA950628/GitHub/ilumenTool/claude.md",
+      "repo_path": "projects/ilumenTool/claude.md"
+    }
+  ]
+}
