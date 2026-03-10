@@ -14,7 +14,7 @@ It is read automatically by Claude Code at the start of each session.
 - **License**: MIT
 - **Language**: Python 3.11+
 - **Status**: Phase 0 — Project Definition (architecture & specs complete)
-- **Version**: 0.4.0
+- **Version**: 0.5.0
 
 ---
 

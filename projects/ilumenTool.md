@@ -77,7 +77,6 @@ Tab access: Users need `BuildOrders: true` in Firestore `Users/{email}/tabs/tabs
 ## Known Issues
 
 - **Monolithic files**: `programming_view.dart` (2,385 lines), `ilusmart1_setup.dart` (1,550 lines) — planned decomposition
-- **Product if-chains**: Product type mapping via chained `if` in 8+ files — refactor to registry/enum
 - **Credential rotation**: Deferred until all deployed instances run Firestore-backed version
 
 ## Roadmap
@@ -85,16 +84,23 @@ Tab access: Users need `BuildOrders: true` in Firestore `Users/{email}/tabs/tabs
 | Phase | Status | Focus |
 | ----- | ------ | ----- |
 | Phase 0 | ✅ Done | Security — secrets externalized |
-| Phase 1 | 🟡 In Progress | Core cleanup: auto-updater, lint, Firebase, GSheets→Firestore, ESP bugs |
-| Phase 2 | Not started | Architecture: product registry, state management, wire `ilumentool_db` |
+| Phase 1 | 🟡 In Progress | Core cleanup: auto-updater, lint, Firebase, GSheets→Firestore, ESP bugs, app-wide logging (#92–#95 done, #96–#99 open) |
+| Phase 2 | 🟡 In Progress | Architecture: ~~product registry (#41)~~ ✅, ~~settings (#2)~~ ✅, ~~file naming (#42)~~ ✅, AVR part config, credential rotation, state management (Riverpod/Bloc), wire `ilumentool_db` |
 | Phase 3 | Not started | View decomposition: break monoliths |
-| Phase 4 | Not started | Testing, logging, CI/CD, documentation |
+| Phase 4 | Not started | Testing, CI/CD, documentation |
 | Extras (PX) | 🟡 Ongoing | Build orders, InvenTree integration, label printing |
 
 ## Completed Migrations
 
 - ✅ GSheets → Firestore (March 5, 2026) — `gsheetConnector.dart` removed, all paths Firestore-only
 - ✅ File naming standardisation (March 9, 2026) — 37 files + 4 folders → `snake_case`
+- ✅ Product registry/enum refactoring (#41) — completed
 - ✅ Lint cleanup — 46 → 4 info-level issues
 - ✅ ESP progress bar bugs fixed
 - ✅ Firebase platform abstraction implemented
+- ✅ App-wide logging foundation (#92–#95) — `app_logger.dart` singleton
+
+## Lessons Learned
+
+The project repo maintains a `Lessons Learned` section in its own `claude.md`. Key rule established:
+- **Always add test cases to `test/test_plan.md`** when making any code change — this was missed during the build() rebuild fix and is now enforced.
