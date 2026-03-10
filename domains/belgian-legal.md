@@ -1,3 +1,8 @@
+---
+name: belgian-legal
+description: Belgian data protection law, GDPR compliance, GBA/APD regulatory bodies, NIS2, retention periods, and cybersecurity frameworks. Use whenever working on GDPR tools, DPO dashboards, privacy policies, DPIA, or any Belgian regulatory compliance.
+---
+
 # Belgian Legal & GDPR — Domain Skill
 
 > Activate for projects involving Belgian data protection law, GDPR compliance, or cybersecurity regulation.

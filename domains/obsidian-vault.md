@@ -1,3 +1,8 @@
+---
+name: obsidian-vault
+description: Obsidian vault structure, Maps of Content, note standards, tagging, and graph view conventions. Use whenever working in a project that uses an Obsidian knowledge vault, creating MOCs, or managing wiki-linked notes.
+---
+
 # Obsidian Vault — Domain Skill
 
 > Activate for projects that use an Obsidian knowledge vault.

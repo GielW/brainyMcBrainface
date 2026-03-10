@@ -1,3 +1,8 @@
+---
+name: code-quality
+description: Universal code hygiene — linting, naming, dead code, imports, error handling, execution discipline, and analyzer cleanup. Use whenever writing, reviewing, or refactoring code in any language.
+---
+
 # Code Quality
 
 ## Universal Rules
@@ -44,7 +49,7 @@ Every project must have a configured linter and formatter:
 ## Error Handling
 
 - **Always add error handling** in new code (try-catch, Result types, etc.)
-- Never swallow errors silently
+- Never swallow errors silently — silent failures make debugging in production nearly impossible because the symptom appears far from the cause
 - Log errors with context (but never log credentials — see `security.md`)
 
 ## Execution Discipline

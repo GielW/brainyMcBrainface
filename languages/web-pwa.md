@@ -1,3 +1,8 @@
+---
+name: web-pwa
+description: JavaScript/TypeScript and Progressive Web App conventions — ESM, Vite, eslint, prettier, service workers, and caching strategies. Activate for any web or PWA project.
+---
+
 # Web / PWA — Language Skill
 
 > Activate for projects using JavaScript, TypeScript, or Progressive Web Apps.
@@ -25,6 +30,31 @@
 - Web App Manifest for installability
 - Cache-first strategy for static assets
 - Network-first for API calls
+
+**Minimal service worker example (cache-first for static, network-first for API):**
+
+```js
+const CACHE_NAME = "v1";
+const STATIC_ASSETS = ["/", "/index.html", "/style.css", "/app.js"];
+
+self.addEventListener("install", (e) =>
+  e.waitUntil(caches.open(CACHE_NAME).then((c) => c.addAll(STATIC_ASSETS)))
+);
+
+self.addEventListener("fetch", (e) => {
+  if (e.request.url.includes("/api/")) {
+    // Network-first for API calls
+    e.respondWith(
+      fetch(e.request).catch(() => caches.match(e.request))
+    );
+  } else {
+    // Cache-first for static assets
+    e.respondWith(
+      caches.match(e.request).then((r) => r || fetch(e.request))
+    );
+  }
+});
+```
 
 ## Build Tools
 

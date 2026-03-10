@@ -1,3 +1,8 @@
+---
+name: ci-cd
+description: GitHub Actions patterns, release pipelines, Dependabot configuration, and artifact management. Use whenever setting up CI/CD, writing workflows, configuring automated testing, or creating release pipelines.
+---
+
 # CI/CD
 
 ## GitHub Actions — Standard Patterns

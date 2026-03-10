@@ -1,3 +1,8 @@
+---
+name: identity
+description: Core identity profile for Giel W. — location, roles, environment, language preferences, and work style. Referenced in every session to ground context. Use whenever you need to know who the user is, what tools they use, or what conventions they follow.
+---
+
 # Identity — Who Is Giel
 
 ## Owner

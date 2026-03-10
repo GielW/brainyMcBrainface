@@ -1,3 +1,8 @@
+---
+name: web-design
+description: Frontend craft rules for building and reviewing visual web pages. Use whenever writing HTML/CSS, designing UI, taking screenshots, matching a reference image, or making any visual web change — even small tweaks.
+---
+
 # Web Design — Frontend Craft Skill
 
 > Universal rules for frontend website design. Apply whenever building or reviewing visual web pages.
@@ -77,8 +82,8 @@
 
 ## Hard Rules
 
-- Do **not** add sections, features, or content not in the reference
-- Do **not** "improve" a reference design — match it
-- Do **not** stop after one screenshot pass
-- Do **not** use `transition-all`
-- Do **not** use default Tailwind blue/indigo as primary color
+- Do **not** add sections, features, or content not in the reference — scope creep breaks client trust and makes comparison impossible
+- Do **not** "improve" a reference design — match it. The client chose that design; unsolicited changes waste review cycles
+- Do **not** stop after one screenshot pass — first passes always miss spacing/color details that only show up on comparison
+- Do **not** use `transition-all` — it triggers expensive layout recalculations and animates properties you didn't intend (width, height, padding)
+- Do **not** use default Tailwind blue/indigo as primary color — it instantly signals "undesigned template" to anyone who's seen Tailwind defaults

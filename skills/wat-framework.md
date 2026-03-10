@@ -1,3 +1,8 @@
+---
+name: wat-framework
+description: The Workflows-Agents-Tools architecture for AI-assisted execution. Separates deterministic tools from probabilistic reasoning. Use whenever designing automation, deciding between agent vs script execution, structuring workflows, or managing subagents.
+---
+
 # WAT Framework — Workflows, Agents, Tools
 
 > Architecture for AI-assisted execution. Separates probabilistic reasoning (agent) from deterministic execution (tools), orchestrated by human-written instructions (workflows).
@@ -59,13 +64,14 @@ When you hit an error:
 
 ## The Self-Improvement Loop
 
-Every failure makes the system stronger:
+Every failure makes the system stronger — fix the tool, update the workflow, move on with a more robust system:
 
 1. Identify what broke
 2. Fix the tool
 3. Verify the fix works
 4. Update the workflow with the new approach
-5. Move on with a more robust system
+
+For the broader learning capture pattern (lessons files, cross-project routing), see the Self-Improvement Loop in `project-tracking.md`.
 
 ## Standard Directory Layout
 

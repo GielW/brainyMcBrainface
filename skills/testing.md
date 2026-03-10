@@ -1,3 +1,8 @@
+---
+name: testing
+description: Test conventions, test types, test plan format, fixture patterns, and runner commands for Python, Dart, and JS/TS. Use whenever writing tests, setting up test infrastructure, or creating test plans.
+---
+
 # Testing
 
 ## Conventions

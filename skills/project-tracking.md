@@ -1,3 +1,8 @@
+---
+name: project-tracking
+description: TODO management, session tracking, planning discipline, verification checklists, and the self-improvement loop. Use whenever creating tasks, updating progress, planning work, checking off linked files, or syncing TODOs to GitHub Issues.
+---
+
 # Project Tracking
 
 ## Planning Discipline
@@ -53,6 +58,7 @@ Every project should define its "linked files" that must be updated together. Th
 - [ ] **TODO/Progress file** — Update task status
 - [ ] **CHANGELOG** — Add entry under `[Unreleased]`
 - [ ] **Commit message** — Follows conventional commits
+- [ ] **GitHub Issues sync** — If TODO items changed, run the TODO-to-Issues sync (see below)
 
 ### On Version Bump
 
@@ -92,3 +98,41 @@ Track project phases in a table:
 | Phase 1 | 🟡 In Progress | Description |
 | Phase 2 | Not started | Description |
 ```
+
+## TODO → GitHub Issues Sync
+
+All TODO items in project markdown files are synced to GitHub Issues via brainyMcBrain's `tools/todo-to-issues.py` script. This keeps GitHub Issues as the single visible backlog across all projects.
+
+### How It Works
+
+- The script parses TODO tables from each project's tracking file (configured in `.sync-config.json` → `todo_file`)
+- Creates GitHub Issues with labels: `synced-from-todo`, `phase:P1-core`, `priority:high`, etc.
+- Updates existing issues when descriptions change
+- Closes issues when TODO status is "Done"
+- Title format: `[TODO #N] Description`
+
+### Supported Table Formats
+
+**Format A** (preferred — ilumenTool-style):
+```markdown
+| # | Phase | Status | Priority | Description |
+| 1 | P1    | Open   | High     | Short description |
+```
+
+**Format B** (DPO-Dashboard-style):
+```markdown
+| Task name | ✅ Done / ⬜ Not started | Date |
+```
+
+### When to Sync
+
+- **After adding/completing TODO items** — run the sync to keep Issues in sync
+- **Locally**: `python3 tools/todo-to-issues.py <project-name>` (from brainyMcBrain)
+- **Via GitHub Action**: Actions → "Sync TODOs to GitHub Issues" → Run workflow
+- **Dry run first**: Add `--dry-run` flag or check the dry run box in the Action
+
+### Convention
+
+- The TODO markdown file is the **source of truth** — edit there, then sync to Issues
+- Never edit synced Issues directly (they'll be overwritten on next sync)
+- Issues created manually (without `synced-from-todo` label) are unaffected

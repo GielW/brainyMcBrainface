@@ -1,3 +1,8 @@
+---
+name: event-planning
+description: Event design, logistics, and production — budget tracking, timeline management, venue planning, supplier management, and cross-linking. Use whenever planning events, tracking budgets, managing guest lists, or coordinating suppliers.
+---
+
 # Event Planning — Domain Skill
 
 > Activate for projects involving event design, logistics, and production.

@@ -1,3 +1,8 @@
+---
+name: dart-flutter
+description: Dart/Flutter-specific style, tooling, linting, state management, and build patterns. Activate for any project using Flutter — covers Riverpod, platform-specific code, process execution, and Linux build dependencies.
+---
+
 # Dart / Flutter — Language Skill
 
 > Activate for projects using Flutter/Dart (e.g., ilumenTool).

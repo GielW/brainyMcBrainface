@@ -1,3 +1,8 @@
+---
+name: git-workflow
+description: Commit conventions, branching strategy, and PR rules. Use whenever writing commit messages, creating branches, reviewing PRs, or resolving merge conflicts — even for small changes.
+---
+
 # Git Workflow
 
 ## Commit Convention

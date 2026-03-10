@@ -1,3 +1,8 @@
+---
+name: iot-hardware
+description: Embedded hardware, firmware, and IoT protocols — ESP32, AVR, esptool, avrdude, serial/USB, MQTT, and production workflows. Use whenever working with microcontrollers, flashing firmware, configuring MQTT, or managing hardware identity.
+---
+
 # IoT & Hardware — Domain Skill
 
 > Activate for projects involving embedded hardware, firmware, and IoT protocols.

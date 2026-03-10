@@ -1,17 +1,22 @@
+---
+name: security
+description: Credential management, secret scanning, encryption standards, and audit trail rules. Use whenever handling API keys, environment variables, authentication, encryption, or any security-sensitive code.
+---
+
 # Security
 
 ## Credentials & Secrets
 
 ### Golden Rules
 
-1. **Never hardcode credentials in source code** — not even temporarily
-2. **Never log credentials** — use `[REDACTED]` or character-count only:
+1. **Never hardcode credentials in source code** — not even temporarily. A single committed secret persists in git history forever, even after deletion
+2. **Never log credentials** — logs get aggregated to SIEMs, shipped to third parties, and retained beyond your control. Use `[REDACTED]` or character-count only:
    ```
    print("token: [REDACTED] ({len(token)} chars)")
    ```
-3. **Never commit secrets to git** — even if you delete them later, they're in history
-4. **Use environment variables** or a secrets manager (Firestore, Vault, .env files)
-5. **`.env` files are always gitignored** — commit `.env.example` with placeholder values
+3. **Never commit secrets to git** — even if you delete them later, they're in history. Rotation is the only fix and it's expensive
+4. **Use environment variables** or a secrets manager (Firestore, Vault, .env files) — this keeps secrets out of the codebase and makes rotation a config change, not a code change
+5. **`.env` files are always gitignored** — commit `.env.example` with placeholder values so new developers know what's needed without seeing real secrets
 
 ### If Credentials Were Exposed
 

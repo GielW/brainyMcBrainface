@@ -1,3 +1,8 @@
+---
+name: python
+description: Python-specific style, tooling, architecture patterns, and project setup. Activate for any project using Python — covers ruff, black, mypy, pytest, virtual environments, and import conventions.
+---
+
 # Python — Language Skill
 
 > Activate for projects using Python (e.g., DPO-Dashboard).

@@ -1,3 +1,8 @@
+---
+name: documentation
+description: Markdown conventions, YAML frontmatter templates, changelog format, version numbering, file naming, and source attribution rules. Use whenever writing or editing markdown files, READMEs, changelogs, or any project documentation.
+---
+
 # Documentation Standards
 
 ## Markdown Conventions
