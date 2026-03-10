@@ -57,7 +57,10 @@ brainyMcBrain/
 ├── .github/workflows/               ← GitHub Actions
 │   ├── validate.yml                 ← Lint brain on push (auto)
 │   ├── sync-to-projects.yml         ← Compile + push claude.md to repos (auto + manual)
+│   ├── triage-brain-updates.yml     ← Auto-label incoming brain-update issues
 │   └── todo-to-issues.yml           ← Sync TODOs to GitHub Issues (manual)
+├── .github/ISSUE_TEMPLATE/          ← Issue templates
+│   └── brain-update.yml             ← Structured brain feedback template
 ├── sync.sh                          ← Local sync (pull/push/status/discover)
 ├── .sync-config.json                ← Project → path mappings
 └── README.md
@@ -146,6 +149,10 @@ Compiles the brain and pushes the result to project repos. Runs in two modes:
 
 Runs automatically on every push to `main` that touches skill, language, domain, project files, or CLAUDE.md. Also runs on pull requests.
 
+### GitHub Action — Triage Brain Updates
+
+Auto-labels incoming `brain-update` issues when they're created via the feedback loop. Parses the issue body to extract target file, category, and source project, then applies corresponding labels (`scope:skills`, `type:convention`, `from:ilumenTool`, etc.).
+
 ### GitHub Action — Sync TODOs to GitHub Issues
 
 A manual Action that parses TODO/progress markdown files from each project and creates/updates/closes GitHub Issues to match.
@@ -186,7 +193,17 @@ Available skills: algorithmic-art, brand-guidelines, canvas-design, claude-api, 
 
 ## Adding a New Project
 
-1. `./sync.sh add ProjectName /path/to/ProjectName/CLAUDE.md` — tracks the original for archive
-2. Create `projects/ProjectName.md` — slim project-specific context referencing skills/languages/domains
-3. Update this README
-4. Optionally add a new language/domain file if the project needs one not yet covered
+Use the scaffold script:
+
+```bash
+python3 tools/init-project.py ProjectName --repo GielW/ProjectName \
+  --languages python --domains belgian-legal \
+  --external pdf docx --compile
+```
+
+This handles everything: project file, config, CLAUDE.md import, and workflow dropdowns. See [Project Scaffold](#project-scaffold) for details.
+
+For archive tracking, also run:
+```bash
+./sync.sh add ProjectName /path/to/ProjectName/claude.md
+```

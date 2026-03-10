@@ -84,7 +84,7 @@ Tab access: Users need `BuildOrders: true` in Firestore `Users/{email}/tabs/tabs
 | Phase | Status | Focus |
 | ----- | ------ | ----- |
 | Phase 0 | ✅ Done | Security — secrets externalized |
-| Phase 1 | 🟡 In Progress | Core cleanup: auto-updater, lint, Firebase, GSheets→Firestore, ESP bugs, app-wide logging (#92–#98 done, #99 open) |
+| Phase 1 | 🟡 In Progress | Core cleanup: auto-updater, lint, Firebase, GSheets→Firestore, ESP bugs, app-wide logging (#92–#99 done) |
 | Phase 2 | 🟡 In Progress | Architecture: ~~product registry (#41)~~ ✅, ~~settings (#2)~~ ✅, ~~file naming (#42)~~ ✅, AVR part config, credential rotation, state management (Riverpod/Bloc), wire `ilumentool_db` |
 | Phase 3 | Not started | View decomposition: break monoliths |
 | Phase 4 | Not started | Testing, CI/CD, documentation |
@@ -100,6 +100,8 @@ Tab access: Users need `BuildOrders: true` in Firestore `Users/{email}/tabs/tabs
 - ✅ Firebase platform abstraction implemented
 - ✅ App-wide logging foundation (#92–#95) — `app_logger.dart` singleton
 - ✅ Logger migration (#96–#98) — services, connectors, UI log sink bridge completed
+- ✅ Views logger migration (#99) — completed
+- ✅ Test plan expanded to 168 cases — added crash context (+8) and serial number timeout (+8)
 
 ## Lessons Learned
 
