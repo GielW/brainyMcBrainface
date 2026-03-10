@@ -14,7 +14,8 @@
 
 Then:
 1. **If currently in brainyMcBrain**: Add it directly to the Inbox table below, or promote it straight to the correct skill/domain/language file
-2. **If in another repo**: Remind the user to switch to brainyMcBrain and add it. Provide the exact text to add and the target file
+2. **If in another repo (compiled claude.md)**: Use the Brain Feedback Loop section at the bottom of the compiled file — ask the user, then `gh issue create` on brainyMcBrain with structured data
+3. **Fallback**: If `gh` is not available, remind the user to switch to brainyMcBrain and add it manually. Provide the exact text and target file
 
 ### What Triggers a Brain Update
 

@@ -23,6 +23,62 @@ BRAIN_DIR = Path(__file__).resolve().parent.parent
 CONFIG_PATH = BRAIN_DIR / ".sync-config.json"
 DEFAULT_OUTPUT = BRAIN_DIR / "compiled"
 
+# ── Feedback loop instruction (injected into every compiled file) ────────────
+
+FEEDBACK_LOOP_SECTION = """\
+## ⚠️ Brain Feedback Loop — Self-Learning System
+
+This file is auto-compiled from **brainyMcBrain**. When you discover reusable knowledge during this session, **do not just tell the user** — actively push it back to the brain.
+
+### When to Trigger
+
+| Trigger | Example |
+|---------|---------|
+| New convention established | "We decided to use X pattern for all services" |
+| Recurring mistake fixed | "This is the third time — document the rule" |
+| Tool/workflow discovered | "This CLI flag saves time" |
+| Legal/regulatory reference | "New GBA guideline" |
+| Cross-project pattern | "Multiple projects share this pattern" |
+
+### Do NOT Trigger For
+
+- One-off debugging steps or temporary workarounds
+- Project-specific data (serial numbers, API keys, etc.)
+- Information already covered in this file
+
+### How to Report Back
+
+When you detect reusable knowledge, **create a GitHub Issue on brainyMcBrain**:
+
+```bash
+gh issue create --repo GielW/brainyMcBrain \\
+  --title "[brain-update] <short description>" \\
+  --label "brain-update,triage" \\
+  --body "## Source Project
+{project_name}
+
+## Suggested Target File
+<!-- one of: skills/*.md, languages/*.md, domains/*.md, projects/*.md, or 'new file needed' -->
+<target>
+
+## Category
+<!-- Convention | Pattern fix | Tool/workflow | Legal/regulatory | Cross-project -->
+<category>
+
+## Knowledge Content
+<the actual rule, convention, or pattern — write it as it should appear in the skill file>
+
+## Context
+<what happened that surfaced this knowledge>"
+```
+
+### Rules
+1. **Always ask the user first**: _"I found reusable knowledge: [summary]. Shall I push this to brainyMcBrain?"_
+2. Only create the issue after user confirms
+3. One issue per piece of knowledge (don't bundle)
+4. Write the knowledge content as you'd want it to appear in the target skill file
+"""
+
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
 
@@ -199,6 +255,10 @@ def compile_project(project_name: str, config: dict, output_dir: Path) -> Path:
     parts.append("## Project Context\n")
     project_content = demote_headings(strip_frontmatter(read_md(project_file)))
     parts.append(project_content.strip())
+    parts.append("\n\n---\n")
+
+    # ── Feedback Loop ──
+    parts.append(FEEDBACK_LOOP_SECTION.format(project_name=project_name))
     parts.append("\n")
 
     # ── Compose ──

@@ -1,0 +1,79 @@
+name: "🧠 Brain Update"
+description: "New reusable knowledge discovered during a project session"
+title: "[brain-update] "
+labels: ["brain-update", "triage"]
+body:
+  - type: input
+    id: source_project
+    attributes:
+      label: Source Project
+      description: "Which project session discovered this knowledge?"
+      placeholder: "e.g., ilumenTool, DPO-Dashboard, 40Jarigen"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: target_file
+    attributes:
+      label: Suggested Target File
+      description: "Where should this knowledge be routed?"
+      options:
+        - skills/identity.md
+        - skills/git-workflow.md
+        - skills/documentation.md
+        - skills/project-tracking.md
+        - skills/code-quality.md
+        - skills/ci-cd.md
+        - skills/wat-framework.md
+        - skills/web-design.md
+        - skills/security.md
+        - skills/testing.md
+        - skills/council-of-masters.md
+        - languages/python.md
+        - languages/dart-flutter.md
+        - languages/web-pwa.md
+        - domains/obsidian-vault.md
+        - domains/belgian-legal.md
+        - domains/iot-hardware.md
+        - domains/event-planning.md
+        - projects/ (project-specific)
+        - new file needed
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Knowledge Category
+      options:
+        - Convention — "We decided to always do X"
+        - Pattern fix — "This recurring mistake should be documented"
+        - Tool/workflow — "This CLI flag or approach saves time"
+        - Legal/regulatory — "New law, guideline, or compliance rule"
+        - Cross-project — "Multiple projects share this pattern"
+    validations:
+      required: true
+
+  - type: textarea
+    id: knowledge
+    attributes:
+      label: Knowledge Content
+      description: "The actual rule, convention, or pattern to add. Write it as you'd want it to appear in the skill file."
+      placeholder: |
+        ## Rule Name
+
+        Description of the convention...
+
+        **DO**: ...
+        **DON'T**: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context / Why
+      description: "What happened that surfaced this knowledge? Why is it reusable?"
+      placeholder: "We hit this issue for the third time when..."
+    validations:
+      required: false

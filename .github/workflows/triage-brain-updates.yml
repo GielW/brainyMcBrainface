@@ -1,0 +1,88 @@
+name: Triage Brain Updates
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  triage:
+    if: contains(github.event.issue.labels.*.name, 'brain-update')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Parse and label issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || '';
+            const issueNumber = context.payload.issue.number;
+            const labels = ['brain-update'];
+
+            // Extract target file
+            const targetMatch = body.match(/## Suggested Target File\s*\n(?:<!--.*-->\s*\n)*([\w\-\/\.]+)/);
+            if (targetMatch) {
+              const target = targetMatch[1].trim();
+              if (target.startsWith('skills/')) labels.push('scope:skills');
+              else if (target.startsWith('languages/')) labels.push('scope:languages');
+              else if (target.startsWith('domains/')) labels.push('scope:domains');
+              else if (target.startsWith('projects/')) labels.push('scope:projects');
+            }
+
+            // Extract category
+            const catMatch = body.match(/## Category\s*\n(?:<!--.*-->\s*\n)*([\w\s\/]+)/);
+            if (catMatch) {
+              const cat = catMatch[1].trim().toLowerCase();
+              if (cat.includes('convention')) labels.push('type:convention');
+              else if (cat.includes('pattern')) labels.push('type:pattern-fix');
+              else if (cat.includes('tool')) labels.push('type:tool');
+              else if (cat.includes('legal')) labels.push('type:legal');
+              else if (cat.includes('cross-project')) labels.push('type:cross-project');
+            }
+
+            // Extract source project
+            const sourceMatch = body.match(/## Source Project\s*\n(\S+)/);
+            if (sourceMatch) {
+              labels.push(`from:${sourceMatch[1].trim()}`);
+            }
+
+            // Ensure labels exist, then apply
+            for (const label of labels) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label
+                });
+              } catch {
+                const colors = {
+                  'brain-update': '7057ff',
+                  'triage': 'fbca04',
+                  'scope:skills': '0075ca',
+                  'scope:languages': '0075ca',
+                  'scope:domains': '0075ca',
+                  'scope:projects': '0075ca',
+                  'type:convention': 'd73a4a',
+                  'type:pattern-fix': 'd73a4a',
+                  'type:tool': '0e8a16',
+                  'type:legal': 'b60205',
+                  'type:cross-project': 'e4e669'
+                };
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label,
+                  color: colors[label] || 'ededed'
+                });
+              }
+            }
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              labels: labels
+            });
+
+            console.log(`Triaged issue #${issueNumber} with labels: ${labels.join(', ')}`);
