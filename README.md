@@ -55,7 +55,7 @@ brainyMcBrain/
 │       └── skills/                  ← 17 community skills (auto-updated)
 ├── .github/workflows/               ← GitHub Actions
 │   ├── validate.yml                 ← Lint brain on push (auto)
-│   ├── sync-to-projects.yml         ← Compile + push claude.md to repos (manual)
+│   ├── sync-to-projects.yml         ← Compile + push claude.md to repos (auto + manual)
 │   └── todo-to-issues.yml           ← Sync TODOs to GitHub Issues (manual)
 ├── sync.sh                          ← Local sync (pull/push/status/discover)
 ├── .sync-config.json                ← Project → path mappings
@@ -122,12 +122,10 @@ The `sync.sh` script serves a **backup/reference** role — it snapshots the ori
 
 ### GitHub Action — Sync claude.md to Projects
 
-Compiles the brain and pushes the result to project repos.
+Compiles the brain and pushes the result to project repos. Runs in two modes:
 
-1. Go to **Actions → Sync claude.md to projects**
-2. Click **Run workflow**
-3. Pick a specific project or `all`
-4. The action compiles the brain, then commits the compiled file to the project's default branch
+- **Automatic:** Triggers after the **Validate Brain** workflow succeeds on `main`. When you push changes to skills, languages, domains, projects, or CLAUDE.md, the brain is validated first — if validation passes, all project repos receive updated compiled files automatically.
+- **Manual:** Go to **Actions → Sync claude.md to projects**, click **Run workflow**, and pick a specific project or `all`.
 
 **Setup:** Add a Personal Access Token as `BRAIN_SYNC_PAT` in this repo's secrets. The token needs `repo` scope (or fine-grained: Contents read/write) for the target repos.
 

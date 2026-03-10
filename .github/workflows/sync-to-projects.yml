@@ -1,6 +1,12 @@
 name: Sync claude.md to projects
 
 on:
+  # Auto-trigger: runs after Validate Brain succeeds on main
+  workflow_run:
+    workflows: ["Validate Brain"]
+    types: [completed]
+    branches: [main]
+  # Manual trigger: pick a specific project or all
   workflow_dispatch:
     inputs:
       project:
@@ -20,7 +26,20 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    # Only run if: manual dispatch OR validation passed
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
     steps:
+      - name: Determine target project
+        id: target
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "project=${{ inputs.project }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "project=all" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout brainyMcBrain
         uses: actions/checkout@v4
         with:
@@ -34,16 +53,12 @@ jobs:
       - name: Compile brain
         run: |
           set -euo pipefail
-          if [[ "${{ inputs.project }}" == "all" ]]; then
-            python tools/compile-brain.py all
-          else
-            python tools/compile-brain.py "${{ inputs.project }}"
-          fi
+          python tools/compile-brain.py "${{ steps.target.outputs.project }}"
 
       - name: Push compiled claude.md to project repos
         env:
           GH_TOKEN: ${{ secrets.BRAIN_SYNC_PAT }}
-          TARGET_PROJECT: ${{ inputs.project }}
+          TARGET_PROJECT: ${{ steps.target.outputs.project }}
         run: |
           set -euo pipefail
 
