@@ -49,6 +49,7 @@ brainyMcBrain/
 ├── tools/                           ← Automation scripts
 │   ├── compile-brain.py             ← Assembles modular brain → project claude.md
 │   ├── validate-brain.py            ← Lints brain for consistency (CI + local)
+│   ├── init-project.py              ← Scaffold a new project (one command)
 │   └── todo-to-issues.py            ← Syncs TODO tables → GitHub Issues
 ├── skills-external/                 ← External skill repos (git submodules)
 │   └── anthropic/                   ← github.com/anthropics/skills
@@ -105,6 +106,18 @@ python3 tools/validate-brain.py                 # Run all checks
 ```
 
 Runs automatically on every push to `main` via the **Validate Brain** GitHub Action.
+
+## Project Scaffold
+
+Registers a new project in one command — creates the project file, updates config, adds CLAUDE.md import, and updates workflow dropdowns.
+
+```bash
+python3 tools/init-project.py MyProject --repo GielW/MyProject \
+  --languages python --domains belgian-legal \
+  --external pdf docx --compile
+```
+
+The script is idempotent — re-running it skips anything already in place.
 
 ## Archive Sync (backup role)
 
