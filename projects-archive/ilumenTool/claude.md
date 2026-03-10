@@ -49,6 +49,7 @@ ilumenTool/                         ← Repo root
     │   │   ├── auto_update_service.dart ← Update check, download, install, telemetry
     │   │   ├── build_order_service.dart ← Build order Firestore CRUD
     │   │   ├── build_order_pdf_service.dart ← PDF generation for build orders
+    │   │   ├── ui_log_sink.dart      ← UILogSink (message list) + UILogOutput (logger→UI bridge)
     │   │   └── firebase/               ← Firebase platform abstraction layer
     │   │       ├── firebase_factory.dart      ← Platform-aware factory (firedart on Linux, official on Windows)
     │   │       ├── firebase_interface.dart     ← Abstract interface for Firebase backends
@@ -402,7 +403,7 @@ This is documented in `firestore.rules` (reference file, deployed manually via F
 ## Testing
 
 - `test/main_test.dart` exists but is minimal.
-- `test/test_plan.md` — 122 manual test cases covering ESP programming (25), Firestore migration (20), Firebase abstraction (4), auto-update (3), build orders (16), product registry refactoring (31), build rebuild fix (5), logging foundation (6), credential redaction (6), and programmer logger migration (6). 5 tests passed (T11, T13, T18, T21, T22).
+- `test/test_plan.md` — 152 manual test cases covering ESP programming (25), Firestore migration (20), Firebase abstraction (4), auto-update (3), build orders (16), product registry refactoring (31), build rebuild fix (5), logging foundation (6), credential redaction (6), programmer logger migration (6), services + connectors logger migration (10), UI log sink bridge (10), and views logger migration (10). 5 tests passed (T11, T13, T18, T21, T22).
 - `scripts/test_auto_update.dart` has 17 end-to-end tests for the auto-updater.
 - No comprehensive unit or widget tests yet (planned Phase 4).
 
@@ -433,7 +434,7 @@ This is documented in `firestore.rules` (reference file, deployed manually via F
 | Phase | Status | Focus |
 | ----- | ------ | ----- |
 | Phase 0 | ✅ Done | Security — secrets externalized, logging redacted |
-| Phase 1 | 🟡 In Progress | Core cleanup: auto-updater (done), ILH-SGR (done), lint cleanup 46→4 info (done), Firebase abstraction (done), GSheets→Firestore (done), ESP bugs (done), **app-wide logging (#13, ~~#92~~, ~~#93~~, ~~#94~~, ~~#95~~, #96–#99)**, error handling (#18, #19, #31, #32, #37), Linux ports (#24–28), regression testing (#44) |
+| Phase 1 | 🟡 In Progress | Core cleanup: auto-updater (done), ILH-SGR (done), lint cleanup 46→4 info (done), Firebase abstraction (done), GSheets→Firestore (done), ESP bugs (done), **app-wide logging (#13, ~~#92~~, ~~#93~~, ~~#94~~, ~~#95~~, ~~#96~~, ~~#97~~, ~~#98~~, #99)**, error handling (#18, #19, #31, #32, #37), Linux ports (#24–28), regression testing (#44) |
 | Phase 2 | 🟡 In Progress | Architecture refactoring: ~~product registry/enum (#41)~~ ✅ Done, ~~settings from `_prodCat` (#2)~~ ✅ Done, AVR part config (#8), ~~file naming standardisation (#42)~~ ✅ Done, credential rotation, state management (Riverpod/Bloc), wire `ilumentool_db` |
 | Phase 3 | Not started | View decomposition: break monoliths (#40), refactor ProductionView (#9) |
 | Phase 4 | Not started | Testing, CI/CD, documentation |
