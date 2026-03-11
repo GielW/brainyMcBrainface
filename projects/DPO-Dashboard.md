@@ -17,6 +17,7 @@
 ## Active Skills
 
 This project uses:
+
 - **Python** — Streamlit, SQLAlchemy, Alembic, Pydantic, pytest
 - **Obsidian vault** — MOCs for project, architecture, legal, modules, security
 - **Belgian legal** — GDPR, GBA/APD, NIS2, CyberFundamentals
@@ -101,6 +102,7 @@ GitHub Actions workflow (`.github/workflows/security-scan.yml`): push to `main`,
 **Next**: Phase 2 — Analysis Modules (DPIA, breach register, vendor assessment, agreements)
 
 Completed in Phase 1:
+
 - ✅ 18 SQLAlchemy models + Alembic migrations (22 tables)
 - ✅ 187 seed records (Futech + web research)
 - ✅ Data repositories (CRUD) for all modules

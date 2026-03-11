@@ -16,20 +16,24 @@ description: Frontend craft rules for building and reviewing visual web pages. U
 ## Reference Image Workflow
 
 ### When a reference image is provided
+
 - Match layout, spacing, typography, and color **exactly**
 - Swap in placeholder content (images via `https://placehold.co/`, generic copy)
 - Do **not** improve or add to the design
 
 ### When no reference image is provided
+
 - Design from scratch with high craft (see Anti-Generic Guardrails below)
 
 ### Comparison Loop
+
 1. Screenshot your output
 2. Compare against the reference — be specific: "heading is 32px but reference shows ~24px", "card gap is 16px but should be 24px"
 3. Fix mismatches, re-screenshot
 4. Do **at least 2 comparison rounds**. Stop only when no visible differences remain or user says so
 
 ### What to Check
+
 - Spacing / padding
 - Font size / weight / line-height
 - Colors (exact hex)

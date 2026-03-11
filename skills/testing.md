@@ -41,7 +41,7 @@ For projects with manual test plans, use this table format:
 | T01 | Auth | Login with valid creds | 1. Open app 2. Enter creds 3. Submit | Dashboard loads | PASS |
 ```
 
-### Status Values
+### Test Status Values
 
 `PASS` | `FAIL` | `SKIP` | `BLOCKED` | `NOT RUN`
 
@@ -75,7 +75,7 @@ When a bug surfaces, follow the four phases in order. Do not skip ahead — most
 - Run the full test suite to ensure no collateral damage
 - If the fix required understanding a subtle behaviour, add a comment explaining **why**
 
-### Anti-Patterns
+### Debugging Anti-Patterns
 
 - Changing code without understanding the root cause ("shotgun debugging")
 - Adding defensive code around the symptom instead of fixing the cause
@@ -101,7 +101,7 @@ Example-based tests verify specific inputs → expected outputs. Property-based 
 2. **Define the input space** — use strategies/generators to produce random valid inputs
 3. **Assert the invariant** — let the framework find counterexamples
 
-### Tools
+### Testing Tools
 
 | Language | Library | Notes |
 |----------|---------|-------|

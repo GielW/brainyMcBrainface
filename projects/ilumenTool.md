@@ -13,6 +13,7 @@
 ## Active Skills
 
 This project uses:
+
 - **Dart/Flutter** — desktop app, Firebase, Firestore
 - **IoT hardware** — ESP32 (esptool), AVR (avrdude), MQTT, 1-Wire
 - **Security** — Firestore-backed secrets, credential rotation
@@ -31,6 +32,7 @@ This project uses:
 | `ILS` | Ilusmart | ATmega | ESP32 | `ILUSMART` |
 
 **When adding a new product**, update ALL of:
+
 1. `programming_view.dart` — `_config` array entry
 2. `product_button_widget.dart` — button label + navigation case
 3. `programming_tab.dart` — product button grid
@@ -51,6 +53,7 @@ This project uses:
 ## Firebase Platform Abstraction
 
 Official Firebase SDKs don't support Linux. Solution: abstraction layer in `lib/services/firebase/`:
+
 - `firebase_interface.dart` — abstract `FirebaseBackend`
 - `firedart_backend.dart` — firedart (works Linux + Windows)
 - `official_sdk_backend.dart` — official SDK (Windows only, stub)
@@ -106,4 +109,5 @@ Tab access: Users need `BuildOrders: true` in Firestore `Users/{email}/tabs/tabs
 ## Lessons Learned
 
 The project repo maintains a `Lessons Learned` section in its own `claude.md`. Key rule established:
+
 - **Always add test cases to `test/test_plan.md`** when making any code change — this was missed during the build() rebuild fix and is now enforced.

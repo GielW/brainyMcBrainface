@@ -15,6 +15,7 @@
 ## Active Skills
 
 This project uses:
+
 - **Event planning** — venue, budget, suppliers, guest management
 - **IoT hardware** — DS2401 1-Wire, ESP32, PCBs, pogo-pin connectors
 - **Obsidian vault** — wikilinks, session tracking, MOCs

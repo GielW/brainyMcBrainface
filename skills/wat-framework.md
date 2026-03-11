@@ -54,7 +54,7 @@ Before writing custom code for any non-trivial functionality:
 | Multiple weak matches | **Compose** — combine 2–3 small packages |
 | Nothing suitable | **Build** — write custom, but informed by research |
 
-### Anti-Patterns
+### Search-First Anti-Patterns
 
 - Jumping to code without checking if a solution exists
 - Over-wrapping a library so heavily it loses its benefits
@@ -81,7 +81,7 @@ Sub-agents only know the literal query, not the PURPOSE behind the request. Use 
 
 ### Sequential Phases for Complex Work
 
-```
+```text
 Phase 1: RESEARCH  → research-summary.md
 Phase 2: PLAN      → plan.md
 Phase 3: IMPLEMENT → code changes
@@ -103,6 +103,7 @@ Before building anything new, check `tools/` based on what the workflow requires
 ### 2. Learn and Adapt on Failure
 
 When you hit an error:
+
 1. Read the full error message and trace
 2. Fix the script and retest (if it uses paid API calls or credits, **check with the user before re-running**)
 3. Document what you learned in the workflow (rate limits, timing quirks, unexpected behavior)
@@ -127,7 +128,7 @@ For the broader learning capture pattern (lessons files, cross-project routing),
 
 ## Standard Directory Layout
 
-```
+```text
 .tmp/           # Temporary/intermediate files (disposable, regenerated as needed)
 tools/          # Python scripts for deterministic execution
 workflows/      # Markdown SOPs defining what to do and how
@@ -257,6 +258,7 @@ When the decision is complex enough, use the Council of Masters (`skills/council
 ### Memorise Insights
 
 When reflexion reveals a pattern or mistake:
+
 - Capture it in the project's `tasks/lessons.md`
 - If it's cross-project, route to the brainyMcBrain Inbox (see Self-Improvement Loop in `project-tracking.md`)
 - Never let the same mistake pass through reflexion twice
@@ -284,6 +286,7 @@ Don't dump everything into context at once. Load information in stages:
 3. **Just-in-time**: Specific file contents, research results — load when acting on them
 
 This is already how brainyMcBrain's `@`-import system works. The same principle applies within sessions:
+
 - Don't read 10 files "just in case" — read when you need them
 - Use search tools to find the right file first, then read targeted sections
 - Discard intermediate results (summarise, then clear raw data)
@@ -298,7 +301,7 @@ This is already how brainyMcBrain's `@`-import system works. The same principle 
 | Compacting at milestones | High | Reset context without losing progress |
 | Structured output formats | Low | Concise tables > verbose prose |
 
-### Anti-Patterns
+### Context Anti-Patterns
 
 - Loading all project files at session start ("just in case")
 - Keeping raw search results in context after extracting what you need

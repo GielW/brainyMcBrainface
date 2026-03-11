@@ -72,7 +72,8 @@ gh issue create --repo GielW/brainyMcBrain \\
 <what happened that surfaced this knowledge>"
 ```
 
-### Rules
+### Brain Update Rules
+
 1. **Always ask the user first**: _"I found reusable knowledge: [summary]. Shall I push this to brainyMcBrain?"_
 2. Only create the issue after user confirms
 3. One issue per piece of knowledge (don't bundle)

@@ -61,7 +61,7 @@ class UserProfile:
     # phone: str      # NOT COLLECTED — no current purpose requires it
 ```
 
-### Rules
+### Purpose Limitation Rules
 
 - When adding a new feature that uses existing personal data, check if the original purpose covers it
 - If not, you need new consent or a new legal basis — this is a product decision, not just an engineering one
@@ -119,7 +119,7 @@ Every application handling personal data must support these rights. Plan for the
 
 Logs are a common source of privacy violations. Treat log output as a potential data breach surface.
 
-### Rules
+### Logging Rules
 
 - **Never log PII** directly — names, emails, phone numbers, IPs, session tokens
 - Use redaction: `user_id=123` instead of `email=jan@example.com`

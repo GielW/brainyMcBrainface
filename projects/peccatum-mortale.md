@@ -12,6 +12,7 @@ Immersive 1920s speakeasy event platform — RSVP, registration station, live sc
 ## Active Skills
 
 This project uses:
+
 - **dart/flutter**
 - **web/pwa**
 - **event planning**

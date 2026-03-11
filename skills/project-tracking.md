@@ -44,6 +44,7 @@ description: TODO management, session tracking, planning discipline, verificatio
 ## Session Tracking
 
 When working in sessions (e.g., with Claude Code):
+
 - Track progress in a session log file
 - Add numbered entries under the date section
 - Update "Up Next" / "Current Phase" sections to reflect state
@@ -58,6 +59,7 @@ Every session has three critical moments. Handle them deliberately:
 #### Session Start — Load Context
 
 Before diving into work:
+
 1. Read the project's `tasks/lessons.md` (or equivalent) for previous learnings
 2. Check the TODO/progress file for current state and "Up Next" items
 3. Review any session handoff notes from the previous session (see Session End below)
@@ -66,6 +68,7 @@ Before diving into work:
 #### Before Compaction / Context Reset — Save State
 
 When context is running low or before a manual `/compact`:
+
 1. Summarise current progress in the session log — what's done, what's in progress, what's blocked
 2. Note any partial state that would be lost: variable names, file paths being worked on, half-finished approach
 3. Write "Up Next" steps clearly enough that a fresh context can pick up without re-exploration
@@ -73,6 +76,7 @@ When context is running low or before a manual `/compact`:
 #### Session End — Persist Learnings
 
 Before closing a session:
+
 1. **Capture what worked** — successful approaches, useful commands, effective patterns
 2. **Capture what failed** — dead ends, wrong assumptions, wasted effort (so the next session doesn't repeat them)
 3. **Capture what's left** — unfinished tasks, open questions, blockers
@@ -147,12 +151,14 @@ Every project should define its "linked files" that must be updated together. Th
 ### Strategic Compaction
 
 When to `/compact` or reset context:
+
 - After research/exploration, **before** implementation
 - After completing a milestone, **before** the next
 - After debugging, **before** feature work
 - After a failed approach, **before** trying a new one
 
 When **NOT** to compact:
+
 - Mid-implementation — you'll lose variable names, file paths, partial state
 
 ## Self-Improvement Loop
@@ -179,15 +185,18 @@ Not every observation deserves to become a skill immediately. Patterns should ma
 #### Confidence Signals
 
 A pattern is ready for promotion when:
+
 - It has been observed in **2+ projects** or **3+ sessions** in the same project
 - The user has **never corrected** the behaviour (or corrections reinforced it)
 - It's **not contradicted** by existing skills
 
 A pattern should stay local (project-only) when:
+
 - It only applies to one framework, stack, or repo structure
 - It depends on project-specific conventions (file layout, naming, tooling)
 
 A pattern should be **demoted or removed** when:
+
 - The user explicitly corrects it
 - It hasn't been relevant for an extended period
 - New evidence contradicts it
@@ -221,7 +230,7 @@ Track project phases in a table:
 
 All TODO items in project markdown files are synced to GitHub Issues via brainyMcBrain's `tools/todo-to-issues.py` script. This keeps GitHub Issues as the single visible backlog across all projects.
 
-### How It Works
+### How TODO Sync Works
 
 - The script parses TODO tables from each project's tracking file (configured in `.sync-config.json` → `todo_file`)
 - Creates GitHub Issues with labels: `synced-from-todo`, `phase:P1-core`, `priority:high`, etc.
@@ -232,12 +241,14 @@ All TODO items in project markdown files are synced to GitHub Issues via brainyM
 ### Supported Table Formats
 
 **Format A** (preferred — ilumenTool-style):
+
 ```markdown
 | # | Phase | Status | Priority | Description |
 | 1 | P1    | Open   | High     | Short description |
 ```
 
 **Format B** (DPO-Dashboard-style):
+
 ```markdown
 | Task name | ✅ Done / ⬜ Not started | Date |
 ```
@@ -265,7 +276,7 @@ When something goes wrong — a bug, a failed approach, a user complaint — don
 
 Ask "why?" iteratively until you reach the root cause (typically 3–5 levels deep):
 
-```
+```text
 Problem: Tests pass locally but fail in CI
   Why? → CI uses a different Python version
   Why? → pyproject.toml doesn't pin the Python version
@@ -275,6 +286,7 @@ Problem: Tests pass locally but fail in CI
 ```
 
 **Rules**:
+
 - Each "why" must be supported by evidence (logs, code, config), not speculation
 - Stop when you reach something you can directly fix
 - If you branch into multiple causes, address the most impactful one first
@@ -360,7 +372,7 @@ One sentence: what problem does this solve?
 4. Verify: every spec requirement has a passing test
 5. If implementation reveals spec gaps, **update the spec first**, then code
 
-### Anti-Patterns
+### Spec Anti-Patterns
 
 - Writing code and then documenting what it does (post-hoc "spec")
 - Specs that describe implementation details instead of requirements
@@ -401,6 +413,7 @@ Break complex work into small, independently verifiable steps. Each step should 
 ### Re-Planning
 
 If a step takes significantly longer than expected or reveals unexpected complexity:
+
 - **Stop** — don't push through a broken plan
 - **Re-assess** — what changed? What do you now know that you didn't?
 - **Re-plan** — update the remaining steps with the new understanding

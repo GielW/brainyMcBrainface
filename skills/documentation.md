@@ -8,7 +8,7 @@ description: Markdown conventions, YAML frontmatter templates, changelog format,
 ## Markdown Conventions
 
 - **Headers**: `# Title` → `## Section` → `### Subsection` (max 3 levels in most docs)
-- **Tables** for structured data; **code blocks** with language hints (```python, ```bash, ```dart, ```text)
+- **Tables** for structured data; **code blocks** with language hints (`python`, `bash`, `dart`, `text`)
 - **Compact table style** — no column padding:
   - Header separator: `| --- | --- | --- |` (not padded)
   - Data cells: `| value | value |` (not padded)

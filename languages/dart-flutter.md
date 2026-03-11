@@ -7,7 +7,7 @@ description: Dart/Flutter-specific style, tooling, linting, state management, an
 
 > Activate for projects using Flutter/Dart (e.g., ilumenTool).
 
-## Style
+## Dart Style
 
 - **Dart SDK**: `>=3.2.0 <4.0.0` (null-safe)
 - **Files**: `snake_case.dart` — enforced across all `lib/` files
@@ -15,7 +15,7 @@ description: Dart/Flutter-specific style, tooling, linting, state management, an
 - **Functions/variables**: `camelCase`
 - **Constants**: `camelCase` or `UPPER_SNAKE_CASE` for compile-time consts
 
-## Tools
+## Dart Tools
 
 | Tool | Purpose | Command |
 |------|---------|---------|
@@ -31,7 +31,7 @@ description: Dart/Flutter-specific style, tooling, linting, state management, an
 - **Target: 0 errors, 0 warnings** before every commit
 - Exclude legacy/archived directories from analysis
 
-## Imports
+## Dart Imports
 
 Always use **package imports** (not relative paths):
 

@@ -11,7 +11,7 @@ description: Obsidian vault structure, Maps of Content, note standards, tagging,
 
 Every Obsidian-enabled project opens its **repo root** as the vault. Standard layout:
 
-```
+```text
 project-root/
 ├── .obsidian/                    # Vault config (committed)
 │   ├── app.json                  # Vault settings

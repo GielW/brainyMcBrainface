@@ -9,7 +9,7 @@ description: Commit conventions, branching strategy, and PR rules. Use whenever 
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/) in **all** repositories:
 
-```
+```text
 <type>(<scope>): <description>
 
 <optional body>
@@ -28,7 +28,7 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/) in **all** r
 | `style` | Formatting, no logic change |
 | `sync` | Sync operations (claude.md, config files) |
 
-### Rules
+### Commit Rules
 
 - Scope is optional but encouraged — use the module/area name
 - Description is imperative, lowercase, no trailing period: `add user auth`, not `Added user auth.`
@@ -55,6 +55,7 @@ fi
 ```
 
 This prevents:
+
 - Empty commit errors ("nothing to commit, working tree clean")
 - Redundant commits that duplicate what CI already pushed
 - Confusion when `git push` says "Everything up-to-date" after a commit that looked like it had changes

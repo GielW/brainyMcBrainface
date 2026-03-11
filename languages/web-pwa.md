@@ -8,13 +8,13 @@ description: JavaScript/TypeScript and Progressive Web App conventions — ESM, 
 > Activate for projects using JavaScript, TypeScript, or Progressive Web Apps.
 > (Placeholder — expand as web projects are added)
 
-## Style
+## Web Style
 
 - **TypeScript preferred** over plain JavaScript
 - **Strict mode**: `"strict": true` in `tsconfig.json`
 - Use ESM (`import/export`) — avoid CommonJS (`require`) in new code
 
-## Tools
+## Web Tools
 
 | Tool | Purpose | Command |
 |------|---------|---------|

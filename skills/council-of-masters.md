@@ -22,7 +22,7 @@ This technique shines when the problem has **multiple valid angles** that intera
 
 Skip it for straightforward questions with a clear factual answer. A council deliberating "what's the syntax for a for-loop" wastes everyone's time.
 
-## How It Works
+## How the Council Works
 
 ### Phase 1: Assess the Question
 
@@ -31,6 +31,7 @@ Read the user's question and identify the **distinct domains** it touches. A goo
 ### Phase 2: Assemble the Council (3–5 Masters)
 
 Select masters dynamically based on the question. Each master has:
+
 - A **title** describing their expertise
 - A **lens** — what they optimise for and what they watch out for
 - A clear reason they're at the table (they must earn their seat)
@@ -111,6 +112,7 @@ Produce a unified recommendation that:
 **User question**: "We need to add multi-language support to the DPO-Dashboard. Should we use i18n library, database-driven translations, or hardcoded JSON files?"
 
 **Council assembled**:
+
 - **DPO/Compliance Lead** — regulatory accuracy in NL/FR/EN
 - **Python Architect** — maintainability, developer experience
 - **UX Specialist** — translator workflow, end-user experience

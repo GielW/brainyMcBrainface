@@ -7,7 +7,7 @@ description: Python-specific style, tooling, architecture patterns, and project 
 
 > Activate for projects using Python (e.g., DPO-Dashboard).
 
-## Style
+## Python Style
 
 - **Line length**: 120 characters
 - **Target**: Python 3.11+
@@ -30,7 +30,7 @@ def calculate_risk(score: float, weight: float = 1.0) -> RiskLevel:
     """
 ```
 
-## Tools
+## Python Tools
 
 | Tool | Purpose | Command |
 |------|---------|---------|
@@ -60,7 +60,7 @@ pip install -e ".[dev]"
 cp .env.example .env
 ```
 
-## Imports
+## Python Imports
 
 ```python
 # 1. Standard library

@@ -48,6 +48,7 @@ on:
 ## Release Pipelines
 
 For projects with release scripts:
+
 1. Version bump (config files + CHANGELOG)
 2. Build (all target platforms)
 3. Package (zip/tar/installer)

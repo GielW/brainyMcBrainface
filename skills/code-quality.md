@@ -122,6 +122,7 @@ For subjective quality (code reviews, design reviews, documentation), use explic
 ```
 
 **Rules**:
+
 - Every score must cite **specific evidence** — no vibes-based scoring
 - A score of 1–2 on any criterion is a **blocker** — fix before proceeding
 - Average below 3 means "go back and redo", not "ship with caveats"
