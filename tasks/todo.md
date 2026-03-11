@@ -11,3 +11,5 @@
 | 5 | P2 | Open | Low | Consider adding auto-trigger (on push to `projects-archive/`) for claude.md sync |
 | 6 | PX | Open | Low | Add structured TODO table to 40Jarigen (currently only session notes, can't be parsed) |
 | 7 | PX | Done | Low | Promote the claudeTemplate.md knowledge or delete it once integrated |
+| 8 | PX | Open | Medium | Research <https://skills.gooseworks.ai/> for useful skills/patterns to extract into brainyMcBrainface |
+| 9 | PX | Open | Medium | Research <https://github.com/karpathy/autoresearch> for useful patterns to extract into brainyMcBrainface |
