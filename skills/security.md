@@ -75,6 +75,48 @@ description: Credential management, secret scanning, encryption standards, and a
 - Review community-contributed skills for dormant/conditional payloads
 - Inline external documentation rather than linking to it when possible
 
+### Supply Chain Risk Analysis (Deep)
+
+> Source: Dependency auditing depth from [trailofbits/skills](https://github.com/trailofbits/skills) (3.5k+ stars, CC-BY-SA-4.0).
+
+Beyond basic typosquatting checks, apply structured supply chain risk analysis to every project:
+
+#### Dependency Auditing
+
+| Check | Tool(s) | Frequency |
+|-------|---------|-----------|
+| Known CVEs | `pip-audit`, `npm audit`, `trivy` | Every CI run |
+| License compliance | `license-checker`, `pip-licenses` | Before adding new deps |
+| Maintainer activity | GitHub insights, `npm info` | Before adopting, quarterly review |
+| Transitive dependencies | `pipdeptree`, `npm ls --all` | When adding deps, after major upgrades |
+| Binary/compiled packages | Manual review | Before adopting native deps |
+
+#### Risk Signals for Dependencies
+
+A dependency is **high risk** if:
+- Last commit > 12 months ago (abandoned)
+- Single maintainer with no succession plan
+- Excessive transitive dependencies (large attack surface)
+- Native/compiled code without reproducible builds
+- Name is confusingly similar to a popular package (typosquatting)
+
+#### SBOM (Software Bill of Materials)
+
+For production deployments, maintain an SBOM:
+- Generate with `syft`, `cyclonedx-bom`, or `trivy sbom`
+- Store in the repo or CI artifacts (CycloneDX or SPDX format)
+- Update automatically in CI — stale SBOMs are worse than no SBOM
+- Required by NIS2 for critical infrastructure (see `domains/belgian-legal.md`)
+
+#### Response Plan
+
+When a CVE is published for a dependency you use:
+1. **Assess impact** — does the vulnerable code path affect your usage?
+2. **Check for patches** — is there an updated version without the CVE?
+3. **Mitigate** — if no patch exists, can you work around the vulnerable feature? Restrict input?
+4. **Communicate** — document the issue and timeline in the project's known issues
+5. **Update** — apply the fix, run full test suite, deploy
+
 ### Sandboxing
 
 - Use `allowedTools` / `deny` lists to restrict agent tool access to only what's needed

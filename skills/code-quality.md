@@ -91,3 +91,47 @@ Every project must have a configured linter and formatter:
 - When removing a field/variable, grep for **all references** (assignments, reads, comments) and clean up in the same change
 - Never suppress warnings on truly dead code — delete it instead
 - Only use `// ignore:` for intentionally kept unused code, with a comment explaining why
+
+## Quality Gates
+
+> Source: LLM-as-Judge and structured evaluation patterns from [NeoLabHQ/context-engineering-kit](https://github.com/NeoLabHQ/context-engineering-kit) (617+ stars, GPL-3.0).
+
+Quality gates are checkpoints where work must meet defined criteria before proceeding. Use them to prevent low-quality output from flowing downstream.
+
+### Gate Placement
+
+| Gate | When | What It Checks |
+|------|------|---------------|
+| **Pre-commit** | Before every commit | Linter clean, tests pass, no secrets, no dead code |
+| **Pre-PR** | Before opening a PR | Spec requirements met, coverage ≥ 80%, CHANGELOG updated |
+| **Pre-merge** | Before merging to main | CI green, review approved, no regressions |
+| **Pre-release** | Before deploying | E2E tests pass, SBOM generated, security scan clean |
+
+### Structured Rubrics
+
+For subjective quality (code reviews, design reviews, documentation), use explicit rubrics instead of gut feeling:
+
+```markdown
+| Criterion | Score (1-5) | Evidence |
+|-----------|-------------|----------|
+| Correctness | _ | Tests pass? Edge cases covered? |
+| Readability | _ | Clear naming? Appropriate comments? |
+| Simplicity | _ | Minimal code for the task? No over-engineering? |
+| Security | _ | Input validated? Secrets safe? |
+| Completeness | _ | All requirements met? Docs updated? |
+```
+
+**Rules**:
+- Every score must cite **specific evidence** — no vibes-based scoring
+- A score of 1–2 on any criterion is a **blocker** — fix before proceeding
+- Average below 3 means "go back and redo", not "ship with caveats"
+
+### Self-Review Checklist
+
+Before submitting any non-trivial change, run through this yourself:
+
+- [ ] Does it do what was asked? (re-read the requirement)
+- [ ] Are there untested edge cases?
+- [ ] Did I leave any temporary code, debug prints, or TODOs?
+- [ ] Would a colleague understand this without explanation?
+- [ ] Does it pass all quality gates above?

@@ -25,6 +25,14 @@
       "todo_file": "ilumentool/docs/TODO.md",
       "source": "/mnt/64AA9536AA950628/GitHub/ilumenTool/claude.md",
       "repo_path": "projects-archive/ilumenTool/claude.md"
+    },
+    {
+      "name": "peccatum-mortale",
+      "repo": "GielW/peccatum-mortale",
+      "target_file": "claude.md",
+      "todo_file": "meta/session-progress.md",
+      "source": "/mnt/64AA9536AA950628/GitHub/peccatum-mortale",
+      "repo_path": "projects-archive/peccatum-mortale/claude.md"
     }
   ]
 }

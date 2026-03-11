@@ -87,3 +87,46 @@ description: Frontend craft rules for building and reviewing visual web pages. U
 - Do **not** stop after one screenshot pass — first passes always miss spacing/color details that only show up on comparison
 - Do **not** use `transition-all` — it triggers expensive layout recalculations and animates properties you didn't intend (width, height, padding)
 - Do **not** use default Tailwind blue/indigo as primary color — it instantly signals "undesigned template" to anyone who's seen Tailwind defaults
+
+## Accessibility (a11y)
+
+> Source: Gap identified during cross-repo research (March 2026). WCAG 2.1 AA is the baseline for all web projects.
+
+Accessibility is not optional. Every page shipped must be usable by people who navigate with keyboards, screen readers, or assistive technology.
+
+### Non-Negotiable Rules
+
+1. **Semantic HTML first** — use `<nav>`, `<main>`, `<article>`, `<button>`, `<label>` etc. for their intended purpose. Never use `<div>` with `onClick` as a button
+2. **All images need `alt` text** — decorative images get `alt=""` (empty, not missing). Informative images get descriptive alt text
+3. **All form inputs need labels** — use `<label for="...">` or `aria-label`. Placeholder text is **not** a label
+4. **Colour is never the only indicator** — if red means error, also add an icon or text. People with colour blindness need a second signal
+5. **Contrast ratios** — text must meet WCAG AA minimums: 4.5:1 for normal text, 3:1 for large text (18px+ bold or 24px+ regular)
+
+### Keyboard Navigation
+
+- Every interactive element must be focusable and operable with keyboard alone
+- Tab order must follow visual reading order (don't override `tabindex` unless necessary)
+- Custom components (dropdowns, modals, tabs) need proper `role`, `aria-*` attributes, and keyboard handlers
+- Focus trapping in modals — Tab cycles within the modal, Escape closes it
+- Always provide visible `:focus-visible` styles — never remove outlines without a replacement
+
+### ARIA — Use Sparingly
+
+- ARIA supplements, it doesn't replace, semantic HTML
+- If a native HTML element does what you need (`<button>`, `<select>`, `<details>`), use it — don't recreate it with ARIA
+- Common patterns:
+  - `aria-expanded` for collapsible sections
+  - `aria-live="polite"` for dynamic content updates (toast notifications, live search results)
+  - `role="alert"` for urgent error messages
+  - `aria-describedby` to associate error messages with form inputs
+
+### Testing Accessibility
+
+| Method | Tool | Catches |
+|--------|------|---------|
+| Automated scan | Lighthouse, axe-core | Missing alt text, contrast, ARIA misuse |
+| Keyboard walkthrough | Manual (Tab, Enter, Escape) | Focus order, trapped focus, unreachable elements |
+| Screen reader test | NVDA (Windows), VoiceOver (Mac) | Reading order, missing announcements, confusing labels |
+
+- Run Lighthouse accessibility audit as part of screenshot comparison loop
+- Fix any score below 90 before delivering

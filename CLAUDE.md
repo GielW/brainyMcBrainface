@@ -78,6 +78,7 @@ Available: algorithmic-art, brand-guidelines, canvas-design, claude-api, doc-coa
 @projects/40Jarigen.md
 @projects/DPO-Dashboard.md
 @projects/ilumenTool.md
+@projects/peccatum-mortale.md
 
 ---
 

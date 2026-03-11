@@ -19,6 +19,7 @@ on:
           - 40Jarigen
           - DPO-Dashboard
           - ilumenTool
+          - peccatum-mortale
 
 permissions:
   contents: read

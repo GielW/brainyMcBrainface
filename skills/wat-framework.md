@@ -215,3 +215,92 @@ For new projects or major features, start with 2 instances:
 | **Instance 2** | Deep Research Agent | Connects to services, creates PRD, architecture diagrams, gathers documentation |
 
 They work in parallel without stepping on each other, then merge their outputs before implementation begins.
+
+## Reflexion & Self-Critique
+
+> Source: Reflexion pattern from [NeoLabHQ/context-engineering-kit](https://github.com/NeoLabHQ/context-engineering-kit) (617+ stars, GPL-3.0) and multi-perspective critique from [obra/superpowers](https://github.com/obra/superpowers).
+
+Don't accept your first output — iterate on it. The reflexion pattern improves quality by forcing structured self-evaluation before delivering results.
+
+### The Reflexion Loop
+
+1. **Generate** — Produce an initial solution (code, plan, analysis)
+2. **Critique** — Evaluate your own output against explicit criteria:
+   - Does it meet all stated requirements?
+   - Are there edge cases not handled?
+   - Is there a simpler approach?
+   - Would a senior engineer accept this?
+3. **Refine** — Fix the issues found in critique
+4. **Loop** — Repeat until no meaningful improvements remain (max 3 cycles to avoid over-polishing)
+
+### When to Invoke Reflexion
+
+| Situation | Reflexion Level |
+|-----------|----------------|
+| Simple, isolated change | Skip — direct execution |
+| Multi-file implementation | Light — one critique pass after initial code |
+| Architecture / security decisions | Full — 2–3 reflexion cycles with explicit criteria |
+| User-facing output (reports, specs) | Full — critique for clarity, accuracy, completeness |
+
+### Multi-Perspective Critique
+
+For high-stakes decisions, evaluate from multiple viewpoints:
+
+- **Correctness**: Does this actually work for all inputs and edge cases?
+- **Security**: What can go wrong if this is attacked or misused?
+- **Maintainability**: Will a future developer understand this in 6 months?
+- **Performance**: Are there obvious inefficiencies or scalability traps?
+- **User impact**: Does this actually solve the user's problem?
+
+When the decision is complex enough, use the Council of Masters (`skills/council-of-masters.md`) for full multi-expert deliberation.
+
+### Memorise Insights
+
+When reflexion reveals a pattern or mistake:
+- Capture it in the project's `tasks/lessons.md`
+- If it's cross-project, route to the brainyMcBrain Inbox (see Self-Improvement Loop in `project-tracking.md`)
+- Never let the same mistake pass through reflexion twice
+
+## Context Engineering
+
+> Source: Research-backed patterns from [NeoLabHQ/context-engineering-kit](https://github.com/NeoLabHQ/context-engineering-kit) — attention budget, progressive disclosure, lost-in-middle effect.
+
+Context engineering is the discipline of controlling **what goes into the context window, in what order, and how much** — because LLMs are not equally attentive to all positions in their context.
+
+### The Attention Budget
+
+Every project, agent, or skill file consumes context tokens. Treat context space like a limited budget:
+
+- **Front-load the important stuff** — instructions at the start of context get the most attention
+- **Back-load secondary detail** — supporting data, examples, reference tables go later
+- **Avoid the middle** — the "lost-in-middle" effect means content in the middle of long contexts gets the least attention. Place critical instructions at the start or end, never buried in the middle
+
+### Progressive Disclosure
+
+Don't dump everything into context at once. Load information in stages:
+
+1. **Always loaded**: Core identity, universal skills, active project summary
+2. **On-demand**: Domain skills, language modules — only when the task needs them
+3. **Just-in-time**: Specific file contents, research results — load when acting on them
+
+This is already how brainyMcBrain's `@`-import system works. The same principle applies within sessions:
+- Don't read 10 files "just in case" — read when you need them
+- Use search tools to find the right file first, then read targeted sections
+- Discard intermediate results (summarise, then clear raw data)
+
+### Token Efficiency Patterns
+
+| Pattern | Saves Tokens | How |
+|---------|-------------|-----|
+| Modular files (small, focused) | High | Only load the modules you need |
+| Summary → detail drill-down | Medium | Start with overview, drill down on demand |
+| CLI tools over MCP servers | Medium | No tool descriptions eating context |
+| Compacting at milestones | High | Reset context without losing progress |
+| Structured output formats | Low | Concise tables > verbose prose |
+
+### Anti-Patterns
+
+- Loading all project files at session start ("just in case")
+- Keeping raw search results in context after extracting what you need
+- Running 10+ MCP servers simultaneously (each adds tool descriptions to context)
+- Ignoring context window usage until you hit truncation

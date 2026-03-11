@@ -13,6 +13,7 @@ on:
           - 40Jarigen
           - DPO-Dashboard
           - ilumenTool
+          - peccatum-mortale
       dry_run:
         description: "Dry run (preview only, no changes)"
         required: false

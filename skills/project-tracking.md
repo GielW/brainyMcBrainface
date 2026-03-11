@@ -254,3 +254,154 @@ All TODO items in project markdown files are synced to GitHub Issues via brainyM
 - The TODO markdown file is the **source of truth** — edit there, then sync to Issues
 - Never edit synced Issues directly (they'll be overwritten on next sync)
 - Issues created manually (without `synced-from-todo` label) are unaffected
+
+## Root Cause Analysis (Kaizen)
+
+> Source: Kaizen/continuous improvement patterns from [NeoLabHQ/context-engineering-kit](https://github.com/NeoLabHQ/context-engineering-kit) (617+ stars, GPL-3.0).
+
+When something goes wrong — a bug, a failed approach, a user complaint — don't just fix the symptom. Use structured root cause analysis to find and eliminate the underlying cause.
+
+### The 5 Whys
+
+Ask "why?" iteratively until you reach the root cause (typically 3–5 levels deep):
+
+```
+Problem: Tests pass locally but fail in CI
+  Why? → CI uses a different Python version
+  Why? → pyproject.toml doesn't pin the Python version
+  Why? → We assumed all environments match dev setup
+  Root cause: Missing version constraint
+  Fix: Pin python-requires in pyproject.toml + add CI matrix
+```
+
+**Rules**:
+- Each "why" must be supported by evidence (logs, code, config), not speculation
+- Stop when you reach something you can directly fix
+- If you branch into multiple causes, address the most impactful one first
+
+### Fishbone Diagram (Ishikawa)
+
+For complex problems with multiple potential causes, categorise by source:
+
+| Category | Check |
+|----------|-------|
+| **Code** | Logic errors, wrong assumptions, missing edge cases |
+| **Environment** | Version mismatches, missing dependencies, config drift |
+| **Data** | Corrupt input, unexpected format, encoding issues |
+| **Process** | Missing tests, skipped reviews, unclear requirements |
+| **External** | API changes, service outages, third-party bugs |
+
+### PDCA Cycle (Plan-Do-Check-Act)
+
+For recurring issues or process improvements:
+
+1. **Plan** — Identify the problem and hypothesise a solution
+2. **Do** — Implement the fix in a small, controlled scope
+3. **Check** — Measure whether the fix actually worked (tests, metrics, user feedback)
+4. **Act** — If it worked, standardise it (update skills, docs, CI). If not, go back to Plan
+
+### When to Use What
+
+| Situation | Technique |
+|-----------|-----------|
+| Single, clear failure | 5 Whys — fast and direct |
+| Complex problem, many possible causes | Fishbone — categorise and eliminate |
+| Recurring issue, needs process change | PDCA — iterative improvement cycle |
+
+## Spec-Driven Development
+
+> Source: Spec-first methodology from [NeoLabHQ/context-engineering-kit](https://github.com/NeoLabHQ/context-engineering-kit) and [obra/superpowers](https://github.com/obra/superpowers).
+
+Write the spec before writing code. A spec is a contract that defines **what** the code must do, so implementation becomes "compilation" — mechanical translation from spec to code.
+
+### When to Write a Spec
+
+| Change Type | Spec Needed? |
+|-------------|-------------|
+| Bug fix with clear reproduction | No — fix it directly |
+| New function with obvious behaviour | No — TDD is sufficient |
+| New feature (multi-file, non-trivial) | **Yes — write a brief spec** |
+| Architecture change / new module | **Yes — write a full spec** |
+| Security-sensitive code | **Yes — spec must cover threat model** |
+
+### Spec Format (Lightweight)
+
+For features and modules, use this structure at minimum:
+
+```markdown
+## Spec: [Feature Name]
+
+### Goal
+One sentence: what problem does this solve?
+
+### Requirements
+- [ ] Functional: what it must do (bullet list)
+- [ ] Non-functional: performance, security, accessibility constraints
+
+### Interface
+- Inputs: what data comes in (types, validation rules)
+- Outputs: what data goes out (types, format)
+- Side effects: what changes in the system
+
+### Edge Cases
+- What happens with empty input?
+- What happens with very large input?
+- What happens on failure?
+
+### Not In Scope
+- What this feature explicitly does NOT do (prevents scope creep)
+```
+
+### Spec-Implementation Loop
+
+1. Write the spec (Markdown, in the feature branch or `docs/`)
+2. Review the spec — does it capture all requirements? Ask the user if unclear
+3. Implement against the spec — each requirement becomes a task, each edge case becomes a test
+4. Verify: every spec requirement has a passing test
+5. If implementation reveals spec gaps, **update the spec first**, then code
+
+### Anti-Patterns
+
+- Writing code and then documenting what it does (post-hoc "spec")
+- Specs that describe implementation details instead of requirements
+- Bloated specs for trivial changes — use judgement on when to skip
+
+## Plan Decomposition
+
+> Source: Task decomposition patterns from [obra/superpowers](https://github.com/obra/superpowers) (77k+ stars, MIT).
+
+Break complex work into small, independently verifiable steps. Each step should be completable in a single focused effort with a clear "done" signal.
+
+### Decomposition Rules
+
+1. **Each step must be verifiable** — "implement the service" is too vague; "add `createUser()` method that passes `test_create_user`" is verifiable
+2. **Steps should be ordered by dependency** — don't plan step 5 before step 3 if 5 depends on 3
+3. **Include the file path** — every implementation step should name the file(s) it touches
+4. **Include the verification** — every step should say how to prove it's done (test, command, visual check)
+
+### Step Format
+
+```markdown
+| # | Step | File(s) | Verification |
+|---|------|---------|-------------|
+| 1 | Add User model with name, email fields | src/models/user.py | `pytest tests/test_user.py::test_user_model` passes |
+| 2 | Add create endpoint | src/api/users.py | `curl -X POST /users` returns 201 |
+| 3 | Add input validation | src/api/users.py | `pytest tests/test_user.py::test_invalid_email` passes |
+```
+
+### Granularity Guidelines
+
+| Scope | Target Step Size |
+|-------|-----------------|
+| Bug fix | 1–3 steps |
+| Small feature | 3–7 steps |
+| Large feature / module | 7–15 steps (group into phases) |
+| Architecture change | Phase-level decomposition → per-phase step decomposition |
+
+### Re-Planning
+
+If a step takes significantly longer than expected or reveals unexpected complexity:
+- **Stop** — don't push through a broken plan
+- **Re-assess** — what changed? What do you now know that you didn't?
+- **Re-plan** — update the remaining steps with the new understanding
+- This is not failure — it's the plan working as designed (plans are hypotheses, not commitments)
