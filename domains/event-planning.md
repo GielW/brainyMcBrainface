@@ -44,6 +44,7 @@ Event projects are **heavily cross-linked**. When changing any file:
 ## Design Decision Tracking
 
 Track design evolution in the relevant files:
+
 - Mark deprecated designs with a warning banner
 - Keep old designs for historical reference
 - Point to the current active spec clearly

@@ -35,3 +35,14 @@ jobs:
 
       - name: Test brain compiler (dry run)
         run: python tools/compile-brain.py all --dry-run
+
+      - name: Install markdownlint
+        run: npm install -g markdownlint-cli2
+
+      - name: Lint markdown source files
+        run: markdownlint-cli2 "skills/**/*.md" "languages/**/*.md" "domains/**/*.md" "projects/**/*.md"
+
+      - name: Lint compiled output
+        run: |
+          python tools/compile-brain.py all
+          markdownlint-cli2 "compiled/**/*.md"

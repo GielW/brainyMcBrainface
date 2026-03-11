@@ -264,6 +264,8 @@ def compile_project(project_name: str, config: dict, output_dir: Path) -> Path:
 
     # ── Compose ──
     compiled = "\n".join(parts).strip() + "\n"
+    # Collapse consecutive blank lines (MD012)
+    compiled = re.sub(r"\n{3,}", "\n\n", compiled)
 
     # ── Write ──
     out_path = output_dir / project_name / project_config["target_file"]
@@ -274,6 +276,33 @@ def compile_project(project_name: str, config: dict, output_dir: Path) -> Path:
 
 
 # ── CLI ──────────────────────────────────────────────────────────────────────
+
+
+def _lint_compiled(output_dir: Path, targets: list[str]) -> None:
+    """Run markdownlint on compiled files if markdownlint-cli2 is available."""
+    import shutil
+    import subprocess
+
+    if not shutil.which("markdownlint-cli2"):
+        print("\n  ℹ markdownlint-cli2 not found — skipping lint (install via: npm i -g markdownlint-cli2)")
+        return
+
+    files = [str(output_dir / name / "*.md") for name in targets]
+    result = subprocess.run(
+        ["markdownlint-cli2"] + files,
+        capture_output=True,
+        text=True,
+        cwd=BRAIN_DIR,
+    )
+
+    if result.returncode == 0:
+        print(f"\n  ✓ Markdown lint: all compiled files clean")
+    else:
+        print(f"\n  ⚠ Markdown lint warnings in compiled output:")
+        for line in result.stdout.strip().splitlines():
+            print(f"    {line}")
+        for line in result.stderr.strip().splitlines():
+            print(f"    {line}")
 
 
 def main():
@@ -314,6 +343,7 @@ def main():
         print(f"  ✓ {name} — {len(included)} files inlined, {line_count} lines → {out_path.relative_to(BRAIN_DIR)}")
 
     if not args.dry_run:
+        _lint_compiled(args.output_dir, targets)
         print(f"\n══ Done ══")
 
 
