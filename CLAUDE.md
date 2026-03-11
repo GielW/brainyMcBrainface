@@ -6,16 +6,17 @@
 
 ## ⚠️ Brain Update Rule — READ THIS FIRST
 
-**This file is the source of truth for all projects.** When working in ANY project session (brainyMcBrain or any other repo), follow this rule:
+**This file is the source of truth for all projects.** When working in ANY project session (brainyMcBrainface or any other repo), follow this rule:
 
 > **Whenever you learn something new, establish a convention, fix a pattern, or make a decision that could apply beyond the current project — tell the user:**
 >
-> _"This looks like reusable knowledge. It should be added to the brainyMcBrain repository. I'll note it for the inbox."_
+> _"This looks like reusable knowledge. It should be added to the brainyMcBrainface repository. I'll note it for the inbox."_
 
 Then:
-1. **If currently in brainyMcBrain**: Add it directly to the Inbox table below, or promote it straight to the correct skill/domain/language file
-2. **If in another repo (compiled claude.md)**: Use the Brain Feedback Loop section at the bottom of the compiled file — ask the user, then `gh issue create` on brainyMcBrain with structured data
-3. **Fallback**: If `gh` is not available, remind the user to switch to brainyMcBrain and add it manually. Provide the exact text and target file
+
+1. **If currently in brainyMcBrainface**: Add it directly to the Inbox table below, or promote it straight to the correct skill/domain/language file
+2. **If in another repo (compiled claude.md)**: Use the Brain Feedback Loop section at the bottom of the compiled file — ask the user, then `gh issue create` on brainyMcBrainface with structured data
+3. **Fallback**: If `gh` is not available, remind the user to switch to brainyMcBrainface and add it manually. Provide the exact text and target file
 
 ### What Triggers a Brain Update
 
@@ -126,9 +127,9 @@ When you learn something new during any project session that could be reusable, 
 
 | Source Project | New Knowledge | Target File | Status |
 |---------------|---------------|-------------|--------|
-| brainyMcBrain | ECC continuous-learning-v2 instinct model (atomic behaviors + confidence scoring + project scoping + evolution to skills) — consider adapting for brainyMcBrain's own brain update loop | `skills/project-tracking.md` | ✅ Promoted |
-| brainyMcBrain | ECC parallelization patterns (git worktrees, cascade method, fork for research vs code) — useful for multi-session workflows | `skills/wat-framework.md` | ✅ Promoted |
-| brainyMcBrain | ECC memory persistence hooks (PreCompact save state, Stop hook persist learnings, SessionStart load context) — session lifecycle automation | `skills/project-tracking.md` | ✅ Promoted |
+| brainyMcBrainface | ECC continuous-learning-v2 instinct model (atomic behaviors + confidence scoring + project scoping + evolution to skills) — consider adapting for brainyMcBrainface's own brain update loop | `skills/project-tracking.md` | ✅ Promoted |
+| brainyMcBrainface | ECC parallelization patterns (git worktrees, cascade method, fork for research vs code) — useful for multi-session workflows | `skills/wat-framework.md` | ✅ Promoted |
+| brainyMcBrainface | ECC memory persistence hooks (PreCompact save state, Stop hook persist learnings, SessionStart load context) — session lifecycle automation | `skills/project-tracking.md` | ✅ Promoted |
 
 ---
 
@@ -140,7 +141,7 @@ When you learn something new during any project session that could be reusable, 
 4. **Languages activate per project** — Only the relevant language module applies
 5. **Domains activate per context** — Belgian legal doesn't apply to a hardware-only session
 6. **Inbox is temporary** — Items should be promoted within the same session or the next
-7. **brainyMcBrain is the source of truth** — All shared knowledge lives here. Individual project repos keep their own claude.md for standalone use, but brainyMcBrain is canonical
+7. **brainyMcBrainface is the source of truth** — All shared knowledge lives here. Individual project repos keep their own claude.md for standalone use, but brainyMcBrainface is canonical
 8. **Always flag brain updates** — When reusable knowledge emerges in any session, notify the user (see Brain Update Rule above)
 
 ## Sync — Archive & Backup

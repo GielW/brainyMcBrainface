@@ -1,4 +1,4 @@
-# brainyMcBrain
+# brainyMcBrainface
 
 Central repository for Giel's `CLAUDE.md` brain — a modular instruction system for AI assistants across all projects, hobbies, and tasks.
 
@@ -10,8 +10,8 @@ New knowledge gets added to the **Inbox** in `CLAUDE.md`, categorised, then prom
 
 ## Structure
 
-```
-brainyMcBrain/
+```text
+brainyMcBrainface/
 ├── CLAUDE.md                        ← Master file (identity + router + inbox)
 ├── skills/                          ← Universal rules (apply to ALL projects)
 │   ├── identity.md                  ← Who is Giel, Belgium, languages, tools
@@ -76,12 +76,12 @@ brainyMcBrain/
 
 ## How Knowledge Flows
 
-brainyMcBrain is the **source of truth**. The workflow:
+brainyMcBrainface is the **source of truth**. The workflow:
 
 1. You're working in a project (e.g., ilumenTool)
 2. You establish a new convention or fix a recurring pattern
-3. **Claude flags it**: _"This looks like reusable knowledge. It should be added to brainyMcBrain."_
-4. Switch to brainyMcBrain → add to the **Inbox** in `CLAUDE.md`
+3. **Claude flags it**: _"This looks like reusable knowledge. It should be added to brainyMcBrainface."_
+4. Switch to brainyMcBrainface → add to the **Inbox** in `CLAUDE.md`
 5. Categorise it (use the Category Quick Reference table)
 6. Promote it to the correct skill/language/domain file
 7. Delete from inbox
@@ -163,10 +163,12 @@ A manual Action that parses TODO/progress markdown files from each project and c
 4. The action creates issues with labels (`phase:P1-core`, `priority:high`, `synced-from-todo`) and closes issues whose TODO status is "Done"
 
 **Supported formats:**
+
 - ilumenTool-style: `| # | Phase | Status | Priority | Description |`
 - DPO-Dashboard-style: `| Task | ✅ Done / ⬜ Not started | Date |`
 
 The parser script lives at `tools/todo-to-issues.py` and can also be run locally:
+
 ```bash
 python3 tools/todo-to-issues.py --dry-run          # Preview all projects
 python3 tools/todo-to-issues.py ilumenTool          # Sync one project
@@ -180,12 +182,14 @@ python3 tools/todo-to-issues.py all                 # Sync all projects
 The [anthropics/skills](https://github.com/anthropics/skills) repo is tracked as a git submodule in `skills-external/anthropic/`. It's updated automatically during the daily cron sync.
 
 To update manually:
+
 ```bash
 ./sync.sh update-external
 ```
 
 To use an external skill in a project, reference it via:
-```
+
+```text
 @skills-external/anthropic/skills/<skill-name>/SKILL.md
 ```
 
@@ -204,6 +208,7 @@ python3 tools/init-project.py ProjectName --repo GielW/ProjectName \
 This handles everything: project file, config, CLAUDE.md import, and workflow dropdowns. See [Project Scaffold](#project-scaffold) for details.
 
 For archive tracking, also run:
+
 ```bash
 ./sync.sh add ProjectName /path/to/ProjectName/claude.md
 ```

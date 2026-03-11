@@ -28,7 +28,7 @@ DEFAULT_OUTPUT = BRAIN_DIR / "compiled"
 FEEDBACK_LOOP_SECTION = """\
 ## ⚠️ Brain Feedback Loop — Self-Learning System
 
-This file is auto-compiled from **brainyMcBrain**. When you discover reusable knowledge during this session, **do not just tell the user** — actively push it back to the brain.
+This file is auto-compiled from **brainyMcBrainface**. When you discover reusable knowledge during this session, **do not just tell the user** — actively push it back to the brain.
 
 ### When to Trigger
 
@@ -48,10 +48,10 @@ This file is auto-compiled from **brainyMcBrain**. When you discover reusable kn
 
 ### How to Report Back
 
-When you detect reusable knowledge, **create a GitHub Issue on brainyMcBrain**:
+When you detect reusable knowledge, **create a GitHub Issue on brainyMcBrainface**:
 
 ```bash
-gh issue create --repo GielW/brainyMcBrain \\
+gh issue create --repo GielW/brainyMcBrainface \\
   --title "[brain-update] <short description>" \\
   --label "brain-update,triage" \\
   --body "## Source Project
@@ -74,7 +74,7 @@ gh issue create --repo GielW/brainyMcBrain \\
 
 ### Brain Update Rules
 
-1. **Always ask the user first**: _"I found reusable knowledge: [summary]. Shall I push this to brainyMcBrain?"_
+1. **Always ask the user first**: _"I found reusable knowledge: [summary]. Shall I push this to brainyMcBrainface?"_
 2. Only create the issue after user confirms
 3. One issue per piece of knowledge (don't bundle)
 4. Write the knowledge content as you'd want it to appear in the target skill file
@@ -188,7 +188,7 @@ def compile_project(project_name: str, config: dict, output_dir: Path) -> Path:
     target = project_config["target_file"]
     parts.append(f"# {target} — {project_name}\n")
     parts.append(
-        "> **Auto-compiled from [brainyMcBrain](https://github.com/GielW/brainyMcBrain).**\n"
+        "> **Auto-compiled from [brainyMcBrainface](https://github.com/GielW/brainyMcBrainface).**\n"
         "> Do not edit directly — changes will be overwritten on next sync.\n"
     )
     parts.append("---\n")

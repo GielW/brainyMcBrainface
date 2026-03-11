@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================================
-# brainyMcBrain sync — two-way sync for claude.md files
+# brainyMcBrainface sync — two-way sync for claude.md files
 # ============================================================================
 #
 # Usage:
@@ -177,7 +177,7 @@ cmd_discover() {
         ((found++))
 
         # Skip third-party locations and this repo's own copies
-        if [[ "$file" == *"linuxbrew"* ]] || [[ "$file" == *".vscode/extensions"* ]] || [[ "$file" == *"brainyMcBrain/projects/"* ]]; then
+        if [[ "$file" == *"linuxbrew"* ]] || [[ "$file" == *".vscode/extensions"* ]] || [[ "$file" == *"brainyMcBrainface/projects/"* ]]; then
             continue
         fi
 
@@ -321,7 +321,7 @@ case "${1:-help}" in
     update-external)  cmd_update_external ;;
     add)              shift; cmd_add "$@" ;;
     help|*)
-        echo "brainyMcBrain — claude.md sync manager"
+        echo "brainyMcBrainface — claude.md sync manager"
         echo ""
         echo "Usage: ./sync.sh <command>"
         echo ""

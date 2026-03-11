@@ -1,12 +1,12 @@
 # External Watch — everything-claude-code
 
-> Track useful patterns from [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) (71k+ stars, MIT license) and sync relevant updates to brainyMcBrain skills.
+> Track useful patterns from [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) (71k+ stars, MIT license) and sync relevant updates to brainyMcBrainface skills.
 
 <!-- Also tracks other repos discovered during skill research (March 2026). -->
 
 ## Repo Details
 
-- **URL**: https://github.com/affaan-m/everything-claude-code
+- **URL**: <https://github.com/affaan-m/everything-claude-code>
 - **Current version at analysis**: v1.8.0 (Mar 2026)
 - **License**: MIT
 - **Last reviewed**: 2026-03-11
@@ -15,7 +15,7 @@
 
 ### Promoted to skills
 
-| ECC Source | brainyMcBrain Target | What We Took |
+| ECC Source | brainyMcBrainface Target | What We Took |
 | --- | --- | --- |
 | `the-security-guide.md` | `skills/security.md` | Agent security (prompt injection, OWASP Agentic Top 10, sandboxing, sanitization, supply chain) |
 | `rules/common/coding-style.md` | `skills/code-quality.md` | Immutability principle, file/function size limits |
@@ -53,7 +53,7 @@ Next review: **June 2026**
 
 ### obra/superpowers (77k+ stars, MIT)
 
-- **URL**: https://github.com/obra/superpowers
+- **URL**: <https://github.com/obra/superpowers>
 - **Last reviewed**: 2026-03-11
 - **What we extracted**: Systematic debugging (4-phase), plan decomposition (micro-tasks), spec-driven development patterns, reflexion/self-critique methodology
 - **What to watch for**:
@@ -64,7 +64,7 @@ Next review: **June 2026**
 
 ### trailofbits/skills (3.5k+ stars, CC-BY-SA-4.0)
 
-- **URL**: https://github.com/trailofbits/skills
+- **URL**: <https://github.com/trailofbits/skills>
 - **Last reviewed**: 2026-03-11
 - **What we extracted**: Property-based testing patterns, supply chain risk analysis depth, fuzzing & sanitiser guidance
 - **What to watch for**:
@@ -76,7 +76,7 @@ Next review: **June 2026**
 
 ### NeoLabHQ/context-engineering-kit (617+ stars, GPL-3.0)
 
-- **URL**: https://github.com/NeoLabHQ/context-engineering-kit
+- **URL**: <https://github.com/NeoLabHQ/context-engineering-kit>
 - **Last reviewed**: 2026-03-11
 - **What we extracted**: Reflexion pattern, Kaizen/5 Whys/PDCA, spec-driven development, context engineering (attention budget, progressive disclosure), quality gates / LLM-as-Judge
 - **What to watch for**:
@@ -88,7 +88,7 @@ Next review: **June 2026**
 
 ### K-Dense-AI/claude-scientific-skills
 
-- **URL**: https://github.com/K-Dense-AI/claude-scientific-skills
+- **URL**: <https://github.com/K-Dense-AI/claude-scientific-skills>
 - **Last reviewed**: 2026-03-11 (surface-level; not deeply analysed)
 - **What we extracted**: Nothing yet — flagged for deeper review
 - **What to watch for**:

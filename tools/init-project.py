@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Project scaffold — registers a new project in the brainyMcBrain knowledge repo.
+Project scaffold — registers a new project in the brainyMcBrainface knowledge repo.
 
 Creates:
   1. projects/<name>.md — stub with Skills header
@@ -267,7 +267,7 @@ def run_compiler(name: str) -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Scaffold a new project in brainyMcBrain",
+        description="Scaffold a new project in brainyMcBrainface",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=f"""
 Available languages: {', '.join(AVAILABLE_LANGUAGES)}

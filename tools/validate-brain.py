@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Brain linter — validates internal consistency of the brainyMcBrain knowledge repo.
+Brain linter — validates internal consistency of the brainyMcBrainface knowledge repo.
 
 Checks:
   1. All @-imports in CLAUDE.md resolve to existing files

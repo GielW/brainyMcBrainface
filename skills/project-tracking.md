@@ -166,7 +166,7 @@ When **NOT** to compact:
 - After **any correction** from the user, capture the pattern in the project's `tasks/lessons.md` (or equivalent)
 - Write rules for yourself that prevent the same mistake recurring
 - Review lessons at the start of each session for the active project
-- If the lesson is cross-project, route it to the brainyMcBrain Inbox (see Brain Update Rule)
+- If the lesson is cross-project, route it to the brainyMcBrainface Inbox (see Brain Update Rule)
 
 ### Pattern Maturity Model
 
@@ -179,7 +179,7 @@ Not every observation deserves to become a skill immediately. Patterns should ma
 | Stage | Maturity | Action |
 | --- | --- | --- |
 | **Observation** | Single occurrence | Note in project's `tasks/lessons.md` — don't promote yet |
-| **Pattern** | 2–3 occurrences across sessions or projects | Add to brainyMcBrain Inbox with evidence |
+| **Pattern** | 2–3 occurrences across sessions or projects | Add to brainyMcBrainface Inbox with evidence |
 | **Convention** | Repeated, proven, never contradicted | Promote to the correct skill/domain/language file |
 
 #### Confidence Signals
@@ -228,7 +228,7 @@ Track project phases in a table:
 
 ## TODO → GitHub Issues Sync
 
-All TODO items in project markdown files are synced to GitHub Issues via brainyMcBrain's `tools/todo-to-issues.py` script. This keeps GitHub Issues as the single visible backlog across all projects.
+All TODO items in project markdown files are synced to GitHub Issues via brainyMcBrainface's `tools/todo-to-issues.py` script. This keeps GitHub Issues as the single visible backlog across all projects.
 
 ### How TODO Sync Works
 
@@ -256,7 +256,7 @@ All TODO items in project markdown files are synced to GitHub Issues via brainyM
 ### When to Sync
 
 - **After adding/completing TODO items** — run the sync to keep Issues in sync
-- **Locally**: `python3 tools/todo-to-issues.py <project-name>` (from brainyMcBrain)
+- **Locally**: `python3 tools/todo-to-issues.py <project-name>` (from brainyMcBrainface)
 - **Via GitHub Action**: Actions → "Sync TODOs to GitHub Issues" → Run workflow
 - **Dry run first**: Add `--dry-run` flag or check the dry run box in the Action
 

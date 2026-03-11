@@ -2,7 +2,7 @@
 """
 todo-to-issues.py — Parse TODO.md tables and sync them to GitHub Issues.
 
-Reads markdown TODO files with the brainyMcBrain table format:
+Reads markdown TODO files with the brainyMcBrainface table format:
     | # | Phase | Status | Priority | Description |
 
 Creates/updates GitHub Issues with matching labels, and closes issues
@@ -202,7 +202,7 @@ def build_issue_body(item: TodoItem, project_name: str) -> str:
         f"---\n\n"
         f"{item.description}\n\n"
         f"---\n"
-        f"*Auto-synced from TODO.md by brainyMcBrain*"
+        f"*Auto-synced from TODO.md by brainyMcBrainface*"
     )
 
 

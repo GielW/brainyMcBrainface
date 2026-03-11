@@ -28,7 +28,7 @@ jobs:
   sync-todos:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout brainyMcBrain
+      - name: Checkout brainyMcBrainface
         uses: actions/checkout@v4
 
       - name: Checkout project repos

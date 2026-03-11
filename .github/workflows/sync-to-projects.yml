@@ -41,7 +41,7 @@ jobs:
             echo "project=all" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Checkout brainyMcBrain
+      - name: Checkout brainyMcBrainface
         uses: actions/checkout@v4
         with:
           submodules: true
@@ -90,10 +90,10 @@ jobs:
             if git diff --quiet; then
               echo "  ✓ $name — already up to date"
             else
-              git config user.name "brainyMcBrain sync"
+              git config user.name "brainyMcBrainface sync"
               git config user.email "brain-sync[bot]@users.noreply.github.com"
               git add "$target_file"
-              git commit -m "sync: update $target_file from brainyMcBrain (compiled)"
+              git commit -m "sync: update $target_file from brainyMcBrainface (compiled)"
               git push
               echo "  ✓ $name — pushed update"
             fi

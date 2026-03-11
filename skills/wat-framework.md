@@ -260,7 +260,7 @@ When the decision is complex enough, use the Council of Masters (`skills/council
 When reflexion reveals a pattern or mistake:
 
 - Capture it in the project's `tasks/lessons.md`
-- If it's cross-project, route to the brainyMcBrain Inbox (see Self-Improvement Loop in `project-tracking.md`)
+- If it's cross-project, route to the brainyMcBrainface Inbox (see Self-Improvement Loop in `project-tracking.md`)
 - Never let the same mistake pass through reflexion twice
 
 ## Context Engineering
@@ -285,7 +285,7 @@ Don't dump everything into context at once. Load information in stages:
 2. **On-demand**: Domain skills, language modules — only when the task needs them
 3. **Just-in-time**: Specific file contents, research results — load when acting on them
 
-This is already how brainyMcBrain's `@`-import system works. The same principle applies within sessions:
+This is already how brainyMcBrainface's `@`-import system works. The same principle applies within sessions:
 
 - Don't read 10 files "just in case" — read when you need them
 - Use search tools to find the right file first, then read targeted sections
