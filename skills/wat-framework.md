@@ -34,6 +34,32 @@ When AI handles every step directly, accuracy compounds negatively (90% per step
 - Credentials and API keys live in `.env` — never stored anywhere else
 - Scripts are consistent, testable, and fast
 
+## Search-First Principle
+
+> Source: `search-first` skill from [everything-claude-code](https://github.com/affaan-m/everything-claude-code).
+
+Before writing custom code for any non-trivial functionality:
+
+1. **Check the repo** — does this already exist? (`rg` / grep through modules and tests)
+2. **Check package registries** — npm, PyPI, pub.dev for existing solutions
+3. **Check MCP servers / plugins** — is there a tool that already does this?
+4. **Check GitHub** — maintained OSS implementations?
+
+### Decision Matrix
+
+| Signal | Action |
+| --- | --- |
+| Exact match, well-maintained, permissive license | **Adopt** — install and use directly |
+| Partial match, good foundation | **Extend** — install + thin wrapper |
+| Multiple weak matches | **Compose** — combine 2–3 small packages |
+| Nothing suitable | **Build** — write custom, but informed by research |
+
+### Anti-Patterns
+
+- Jumping to code without checking if a solution exists
+- Over-wrapping a library so heavily it loses its benefits
+- Installing a massive dependency for one small feature
+
 ## Subagent Strategy
 
 - **Use subagents liberally** to keep the main context window clean and focused
@@ -41,6 +67,32 @@ When AI handles every step directly, accuracy compounds negatively (90% per step
 - For complex problems, throw more compute at it — spin up subagents rather than cramming everything into one context
 - **One task per subagent** for focused execution and cleaner results
 - Keep the main agent for orchestration and decision-making; let subagents do the heavy lifting
+
+### The Sub-Agent Context Problem
+
+> Source: Longform Guide from [everything-claude-code](https://github.com/affaan-m/everything-claude-code).
+
+Sub-agents only know the literal query, not the PURPOSE behind the request. Use the **Iterative Retrieval Pattern**:
+
+1. Orchestrator sends query with objective context (not just the question)
+2. Evaluate every sub-agent return — ask follow-up questions before accepting
+3. Sub-agent goes back to source, refines, returns
+4. Loop until sufficient (max 3 cycles)
+
+### Sequential Phases for Complex Work
+
+```
+Phase 1: RESEARCH  → research-summary.md
+Phase 2: PLAN      → plan.md
+Phase 3: IMPLEMENT → code changes
+Phase 4: REVIEW    → review-comments.md
+Phase 5: VERIFY    → done or loop back
+```
+
+- Each agent gets ONE clear input and produces ONE clear output
+- Outputs become inputs for the next phase
+- Store intermediate outputs in files
+- Use `/clear` between agents when context is exhausted
 
 ## Operating Rules
 
@@ -83,3 +135,83 @@ workflows/      # Markdown SOPs defining what to do and how
 ```
 
 **Core file principle:** Local files are for processing. Deliverables go to cloud services (Google Sheets, Slides, etc.) where the user can access them directly. Everything in `.tmp/` is disposable.
+
+## Context & Token Awareness
+
+> Source: Token optimization and context management from [everything-claude-code](https://github.com/affaan-m/everything-claude-code).
+
+### Model Selection
+
+| Task Type | Model Tier | Why |
+| --- | --- | --- |
+| Exploration, search, simple edits | Fastest/cheapest | Good enough for finding files, single-file changes |
+| Multi-file implementation, PR reviews | Mid-tier (Sonnet) | Best balance for coding, catches nuance |
+| Architecture, security, complex debugging | Premium (Opus) | Deep reasoning, can't afford to miss things |
+
+Default to mid-tier for 90% of coding. Upgrade when first attempt failed, task spans 5+ files, or is security-critical.
+
+### Context Window Hygiene
+
+- Keep unused MCP servers disabled — each tool description eats context tokens
+- Aim for < 10 MCP servers active, < 80 tools loaded
+- Use CLI wrappers / skills instead of MCP servers where feasible (e.g., `gh pr create` instead of GitHub MCP)
+- Modular codebases (small files, small functions) reduce token cost per task and increase first-try accuracy
+
+### Session Lifecycle
+
+- Compact at logical breakpoints (after research, after milestone, after debugging) — never mid-implementation
+- Use `/clear` between unrelated tasks
+- Persist session state to files for cross-session continuity
+- Monitor context usage — avoid the last 20% of the context window for complex multi-file work
+
+## Parallelization
+
+> Source: Parallelization patterns from [everything-claude-code](https://github.com/affaan-m/everything-claude-code) longform guide.
+
+### Core Rule
+
+The goal is: **how much can you get done with the minimum viable amount of parallelization.** Don't set arbitrary terminal counts — add a parallel instance only out of true necessity.
+
+### Git Worktrees (Parallel Code Changes)
+
+When multiple agent instances work on code that overlaps, use git worktrees to avoid conflicts. Each worktree is an independent checkout:
+
+```bash
+git worktree add ../project-feature-a feature-a
+git worktree add ../project-feature-b feature-b
+# Each worktree gets its own agent instance
+cd ../project-feature-a && claude
+```
+
+- Each instance must have a **well-defined, non-overlapping scope**
+- Name all chats (`/rename <name>`) so you can tell them apart
+- Use worktrees when tasks touch the same files; use simple forks when they don't
+
+### Fork for Research vs Code
+
+The simplest parallelization pattern:
+
+- **Main chat** → code changes (implementation, refactoring)
+- **Forked chats** → questions about the codebase, research on external services, exploration
+
+This keeps the main context clean for implementation while offloading read-only analysis to forks.
+
+### The Cascade Method
+
+When running multiple instances:
+
+1. Open new tasks in new tabs **to the right**
+2. Sweep left to right, oldest to newest
+3. Focus on **at most 3–4 tasks** at a time
+4. Close completed tabs to keep the workspace manageable
+
+### Two-Instance Kickoff Pattern
+
+For new projects or major features, start with 2 instances:
+
+| Instance | Role | Focus |
+| --- | --- | --- |
+| **Instance 1** | Scaffolding Agent | Lays down project structure, configs, CLAUDE.md, rules |
+| **Instance 2** | Deep Research Agent | Connects to services, creates PRD, architecture diagrams, gathers documentation |
+
+They work in parallel without stepping on each other, then merge their outputs before implementation begins.

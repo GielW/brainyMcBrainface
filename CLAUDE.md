@@ -123,7 +123,9 @@ When you learn something new during any project session that could be reusable, 
 
 | Source Project | New Knowledge | Target File | Status |
 |---------------|---------------|-------------|--------|
-| | | | |
+| brainyMcBrain | ECC continuous-learning-v2 instinct model (atomic behaviors + confidence scoring + project scoping + evolution to skills) — consider adapting for brainyMcBrain's own brain update loop | `skills/project-tracking.md` | ✅ Promoted |
+| brainyMcBrain | ECC parallelization patterns (git worktrees, cascade method, fork for research vs code) — useful for multi-session workflows | `skills/wat-framework.md` | ✅ Promoted |
+| brainyMcBrain | ECC memory persistence hooks (PreCompact save state, Stop hook persist learnings, SessionStart load context) — session lifecycle automation | `skills/project-tracking.md` | ✅ Promoted |
 
 ---
 

@@ -11,6 +11,18 @@ description: Universal code hygiene — linting, naming, dead code, imports, err
 - Run the project's linter/analyzer **before every commit**
 - Fix warnings immediately; don't accumulate tech debt
 
+## Immutability
+
+> Source: [everything-claude-code](https://github.com/affaan-m/everything-claude-code) coding-style rule.
+
+Prefer creating new objects over mutating existing ones. Immutable data prevents hidden side effects, makes debugging easier, and enables safe concurrency. Exceptions exist (performance-critical loops, builder patterns), but the default should be **copy, don't mutate**.
+
+## File & Function Size
+
+- **Files**: 200–400 lines typical, 800 max. Extract when a file grows beyond this
+- **Functions**: < 50 lines. If it's longer, it's doing too much
+- **Nesting**: Max 4 levels deep. Flatten with early returns or extraction
+
 ## Linting & Formatting
 
 Every project must have a configured linter and formatter:

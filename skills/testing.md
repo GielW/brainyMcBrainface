@@ -20,6 +20,17 @@ description: Test conventions, test types, test plan format, fixture patterns, a
 | E2E tests | Full user flows | Critical paths |
 | Manual test plans | Hardware, UI, edge cases | When automation isn't feasible |
 
+## TDD Workflow (RED → GREEN → IMPROVE)
+
+> Source: reinforced from [everything-claude-code](https://github.com/affaan-m/everything-claude-code) TDD rule.
+
+1. **RED** — Write a failing test first
+2. **GREEN** — Write the minimal implementation to make it pass
+3. **IMPROVE** — Refactor while keeping tests green
+4. Verify coverage (80%+)
+
+**Key rule**: Fix the implementation, not the tests (unless the test itself is wrong).
+
 ## Test Plan Format
 
 For projects with manual test plans, use this table format:
